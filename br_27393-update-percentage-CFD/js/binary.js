@@ -1052,11 +1052,11 @@ var Elevio = function () {
     var addEventListenerGTM = function addEventListenerGTM() {
         window._elev.on('widget:opened', function () {
             // eslint-disable-line no-underscore-dangle
-            GTM.pushDataLayer({ event: 'elevio_widget_opened' });
+            GTM.pushDataLayer({ event: 'elevio_widget_opened', is_elevio: true });
         });
         window._elev.on('page:view', function () {
             // eslint-disable-line no-underscore-dangle
-            GTM.pushDataLayer({ event: 'elevio_page_views' });
+            GTM.pushDataLayer({ event: 'elevio_page_views', is_elevio: true });
         });
     };
 
@@ -1159,7 +1159,7 @@ var GTM = function () {
 
     var pushDataLayer = function pushDataLayer(data) {
         if (isGtmAvailable()) {
-            if (isGtmApplicable() && !isLoginPages()) {
+            if (isGtmApplicable() && (!isLoginPages() || data.is_elevio)) {
                 dataLayer.push(_extends({}, getCommonVariables(), data));
             }
         }
@@ -11813,10 +11813,10 @@ __webpack_require__(/*! ../../_common/lib/polyfills/string.includes */ "./src/ja
 var Page = function () {
     var init = function init() {
         State.set('is_loaded_by_pjax', false);
+        GTM.init();
         Url.init();
         Elevio.init();
         PushNotification.init();
-        GTM.init();
         onDocumentReady();
         Crowdin.init();
     };
