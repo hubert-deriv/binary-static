@@ -24,17 +24,13 @@ const Virtual = () => (
                         {it.L('Strong passwords contain at least 8 characters, combine uppercase and lowercase letters, numbers, and symbols.')}
                     </p>
                 </div>
-
-                <FormRow
-                    type='checkbox'
-                    checked
-                    id='email_consent'
-                    row_class='invisible'
-                    label_row_id='email_consent_label'
-                    label={it.L('Receive news and special offers')}
-                />
             </Fieldset>
-
+            <FormRow
+                type='checkbox'
+                id='email_consent'
+                label_row_id='email_consent_label'
+                label={it.L('I want to receive updates on binary.com products, services, and events.')}
+            />
             <div className='center-text'>
                 <button className='button' type='submit'>{it.L('Create new virtual-money account')}</button>
                 <p className='errorfield invisible' id='error-account-opening' />
