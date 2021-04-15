@@ -25,12 +25,14 @@ const Virtual = () => (
                     </p>
                 </div>
             </Fieldset>
-            <FormRow
-                type='checkbox'
-                id='email_consent'
-                label_row_id='email_consent_label'
-                label={it.L('I want to receive updates on binary.com products, services, and events.')}
-            />
+            <div data-show='eucountry'>
+                <FormRow
+                    type='checkbox'
+                    id='email_consent'
+                    label_row_id='email_consent_label'
+                    label={it.L('I want to receive updates on binary.com products, services, and events.')}
+                />
+            </div>
             <div className='center-text'>
                 <button className='button' type='submit'>{it.L('Create new virtual-money account')}</button>
                 <p className='errorfield invisible' id='error-account-opening' />
