@@ -10,7 +10,7 @@ const Virtual = () => (
 
         <form id='virtual-form' className='gr-padding-10 invisible'>
             <Fieldset legend={it.L('Details')}>
-                <FormRow type='select' id='residence' className='invisible' label={it.L('Country of residence')} attributes={{ single: 'single' }}  />
+                <FormRow type='select' id='residence' className='invisible' label={it.L('Country of residence')} attributes={{ single: 'single' }} />
                 <FormRow
                     autoComplete='new-password'
                     type='password'
@@ -25,7 +25,7 @@ const Virtual = () => (
                     </p>
                 </div>
             </Fieldset>
-            <div data-show='eucountry'>
+            <div id="consent_checkbox">
                 <FormRow
                     type='checkbox'
                     id='email_consent'
