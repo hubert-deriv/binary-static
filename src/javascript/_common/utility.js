@@ -274,6 +274,9 @@ class PromiseClass {
     }
 }
 
+const lc_licenseID = 12049137;
+const lc_clientID = '66aa088aad5a414484c1fd1fa8a5ace7';
+
 module.exports = {
     showLoadingImage,
     getHighestZIndex,
@@ -295,4 +298,6 @@ module.exports = {
     getStaticHash,
     PromiseClass,
     removeObjProperties,
+    lc_licenseID,
+    lc_clientID,
 };
