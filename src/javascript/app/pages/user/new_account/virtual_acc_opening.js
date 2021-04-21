@@ -66,9 +66,6 @@ const VirtualAccOpening = (() => {
         const $clients_country = $residence.find(`option[value="${clients_country}"]`);
         if (!$clients_country.attr('disabled')) {
             $clients_country.prop('selected', true);
-            if($clients_country.prop('selected') === true) {
-                
-            }
         }
         $residence
             .select2({
@@ -80,7 +77,7 @@ const VirtualAccOpening = (() => {
             
         const get_selected_value = document.getElementById('select2-residence-container').getAttribute('title');
         const residence_dropdown = document.getElementById('residence');
-        if(isEuCountry(get_selected_value)) {
+        if (isEuCountry(get_selected_value)) {
             consent_checkbox.setVisibility(1);
         } else {
             consent_checkbox.setVisibility(0);
@@ -88,12 +85,12 @@ const VirtualAccOpening = (() => {
 
         residence_dropdown.onchange = () => {
             const updated_selected_value = document.getElementById('select2-residence-container').getAttribute('title');
-            if(isEuCountry(updated_selected_value) === true) {
+            if (isEuCountry(updated_selected_value) === true) {
                 consent_checkbox.setVisibility(1);
             } else {
                 consent_checkbox.setVisibility(0);
             }
-        }
+        };
     };
 
     const bindValidation = () => {
