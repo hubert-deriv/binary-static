@@ -96,6 +96,7 @@ const PaymentAgentList = (() => {
 
     const showEmptyListMsg = () => {
         $('.barspinner').setVisibility(0);
+        getElementById('no_paymentagent').setVisibility(1);
     };
 
     return {
