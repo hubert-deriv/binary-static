@@ -50,7 +50,6 @@ const VirtualAccOpening = (() => {
                 }));
             });
             $residence.html($options_with_disabled.html());
-
             BinarySocket.wait('website_status').then(response => handleWebsiteStatus(response.website_status, $residence));
         } else {
             $residence.setVisibility(1);
@@ -59,6 +58,7 @@ const VirtualAccOpening = (() => {
 
     const handleWebsiteStatus = (website_status = {}, $residence) => {
         const consent_checkbox = document.getElementById('consent_checkbox');
+        const email_consent = document.getElementById('email_consent');
         if (!website_status || Utility.isEmptyObject(website_status)) return;
         const clients_country = website_status.clients_country;
 
@@ -77,19 +77,19 @@ const VirtualAccOpening = (() => {
             
         const get_selected_value = document.getElementById('select2-residence-container').getAttribute('title');
         const residence_dropdown = document.getElementById('residence');
-        if (isEuCountry(get_selected_value)) {
-            consent_checkbox.setVisibility(1);
-        } else {
-            consent_checkbox.setVisibility(0);
-        }
 
+        if (!isEuCountry(get_selected_value)) {
+            email_consent.classList.add("hide-checkbox")
+            consent_checkbox.classList.add("hide-checkbox")
+        }
         residence_dropdown.onchange = () => {
             const updated_selected_value = document.getElementById('select2-residence-container').getAttribute('title');
-            if (isEuCountry(updated_selected_value) === true) {
-                consent_checkbox.setVisibility(1);
-            } else {
-                consent_checkbox.setVisibility(0);
-            }
+            isEuCountry(updated_selected_value)
+            ? email_consent.classList.remove("hide-checkbox") 
+            : email_consent.classList.add("hide-checkbox")
+            isEuCountry(updated_selected_value)
+            ? consent_checkbox.classList.remove("hide-checkbox")
+            : consent_checkbox.classList.add("hide-checkbox")
         };
     };
 

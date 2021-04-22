@@ -493,6 +493,9 @@ button .barspinner.white {
     .select2-container {
         max-width: 220px;
     }
+    .hide-checkbox {
+        visibility: hidden !important;
+    }
 }
 
 .password {
