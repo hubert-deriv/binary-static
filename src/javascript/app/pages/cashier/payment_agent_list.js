@@ -94,8 +94,16 @@ const PaymentAgentList = (() => {
     };
 
     const showEmptyListMsg = () => {
-        $('.barspinner').setVisibility(0);
-        $('#no_paymentagent').setVisibility(1);
+        const currency = Client.get('landing_company_shortcode');
+        if (currency === 'virtual') {
+            $('.barspinner').setVisibility(0);
+            $('#virtual_currency').setVisibility(1);
+            $('#no_paymentagent').setVisibility(0);
+        } else {
+            $('.barspinner').setVisibility(0);
+            $('#virtual_currency').setVisibility(0);
+            $('#no_paymentagent').setVisibility(1);
+        }
     };
 
     return {
