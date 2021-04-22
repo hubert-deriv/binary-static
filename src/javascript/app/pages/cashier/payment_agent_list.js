@@ -1,7 +1,8 @@
-const BinaryPjax   = require('../../base/binary_pjax');
-const Client       = require('../../base/client');
-const BinarySocket = require('../../base/socket');
-const Url          = require('../../../_common/url');
+const BinaryPjax        = require('../../base/binary_pjax');
+const Client            = require('../../base/client');
+const BinarySocket      = require('../../base/socket');
+const Url               = require('../../../_common/url');
+const getElementById    = require('../../../_common/common_functions').getElementById;
 
 const PaymentAgentList = (() => {
     let $pa_list_container,
@@ -94,16 +95,7 @@ const PaymentAgentList = (() => {
     };
 
     const showEmptyListMsg = () => {
-        const currency = Client.get('landing_company_shortcode');
-        if (currency === 'virtual') {
-            $('.barspinner').setVisibility(0);
-            $('#virtual_currency').setVisibility(1);
-            $('#no_paymentagent').setVisibility(0);
-        } else {
-            $('.barspinner').setVisibility(0);
-            $('#virtual_currency').setVisibility(0);
-            $('#no_paymentagent').setVisibility(1);
-        }
+        $('.barspinner').setVisibility(0);
     };
 
     return {
