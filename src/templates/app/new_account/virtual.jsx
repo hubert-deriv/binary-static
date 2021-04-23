@@ -30,7 +30,7 @@ const Virtual = () => (
                     type='checkbox'
                     id='email_consent'
                     label_row_id='email_consent_label'
-                    label={it.L('I want to receive updates on binary.com products, services, and events.')}
+                    label={it.L(`I want to receive updates on ${it.website_name} products, services, and events.`)}
                 />
             </div>
             <div className='center-text'>

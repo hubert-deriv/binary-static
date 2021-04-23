@@ -48,7 +48,7 @@ const FormManager = (() => {
 
         fields.forEach((field) => {
             if (!field.exclude_request) {
-                if (field.$.attr('class') === 'hide-checkbox' || field.$.is(':visible') || field.value || field.$.attr('data-force')) {
+                if (field.$.attr('class') === 'hide-product-checkbox' || field.$.is(':visible') || field.value || field.$.attr('data-force')) {
                     val = field.$.val();
                     key = field.request_field || field.selector;
 
@@ -59,7 +59,7 @@ const FormManager = (() => {
                         value = field.$.attr('data-value');
                     } else if (/lbl_/.test(key)) {
                         value = field.value || field.$.text();
-                    } else if (field.$.attr('class') === 'hide-checkbox') {
+                    } else if (field.$.attr('class') === 'hide-product-checkbox') {
                         value = field.$.is(':checked') ? 0 : 1;
                     } else if (field.$.is(':checkbox')) {
                         value = field.$.is(':checked') ? 1 : 0;
