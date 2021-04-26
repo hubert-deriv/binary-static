@@ -13,7 +13,7 @@ const LocalStore               = require('../../../../_common/storage').LocalSto
 const State                    = require('../../../../_common/storage').State;
 const urlFor                   = require('../../../../_common/url').urlFor;
 const Utility                  = require('../../../../_common/utility');
-const isEuCountrySelected         = require('../../../../_common/utility').isEuCountrySelected;
+const isEuCountrySelected      = require('../../../../_common/utility').isEuCountrySelected;
 const isBinaryApp              = require('../../../../config').isBinaryApp;
 
 const VirtualAccOpening = (() => {
