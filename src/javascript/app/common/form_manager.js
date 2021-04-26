@@ -60,7 +60,7 @@ const FormManager = (() => {
                     } else if (/lbl_/.test(key)) {
                         value = field.value || field.$.text();
                     } else if (field.$.attr('class') === 'hide-product-checkbox') {
-                        value = field.$.is(':checked') ? 0 : 1;
+                        value = field.$.attr('class') === 'hide-product-checkbox' ? 1 : 0;
                     } else if (field.$.is(':checkbox')) {
                         value = field.$.is(':checked') ? 1 : 0;
                     } else if (Array.isArray(val)) {
