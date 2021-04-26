@@ -1369,16 +1369,16 @@ var TrafficSource = __webpack_require__(/*! ../../app/common/traffic_source */ "
 var licenseID = __webpack_require__(/*! ../utility */ "./src/javascript/_common/utility.js").lc_licenseID;
 
 var LiveChat = function () {
-    var utm_data = TrafficSource.getData();
-    var utm_source = TrafficSource.getSource(utm_data) || '';
-    var utm_campaign = utm_data.utm_campaign || '';
-    var utm_medium = utm_data.utm_medium || '';
-    var session_variables = { is_logged_in: false, loginid: '', landing_company_shortcode: '', currency: '', residence: '', email: '', utm_source: utm_source, utm_medium: utm_medium, utm_campaign: utm_campaign };
+
     var client_email = void 0,
         first_name = void 0,
         last_name = void 0;
 
     var setSessionVariables = function setSessionVariables() {
+        var utm_data = TrafficSource.getData();
+        var utm_source = TrafficSource.getSource(utm_data);
+        var utm_campaign = utm_data.utm_campaign;
+        var utm_medium = utm_data.utm_medium;
         var is_logged_in = !!ClientBase.isLoggedIn();
         var loginid = ClientBase.get('loginid');
         var landing_company_shortcode = ClientBase.get('landing_company_shortcode');
@@ -1386,7 +1386,9 @@ var LiveChat = function () {
         var residence = ClientBase.get('residence');
         var email = ClientBase.get('email');
 
-        session_variables = _extends({}, is_logged_in && { is_logged_in: is_logged_in }, loginid && { loginid: loginid }, landing_company_shortcode && { landing_company_shortcode: landing_company_shortcode }, currency && { currency: currency }, residence && { residence: residence }, email && { email: email }, utm_source && { utm_source: utm_source }, utm_campaign && { utm_campaign: utm_campaign }, utm_medium && { utm_medium: utm_medium });
+        var session_variables = _extends({
+            is_logged_in: is_logged_in
+        }, loginid && { loginid: loginid }, landing_company_shortcode && { landing_company_shortcode: landing_company_shortcode }, currency && { currency: currency }, residence && { residence: residence }, email && { email: email }, utm_source && { utm_source: utm_source }, utm_campaign && { utm_campaign: utm_campaign }, utm_medium && { utm_medium: utm_medium });
         window.LiveChatWidget.call('set_session_variables', session_variables);
     };
 
@@ -1412,7 +1414,7 @@ var LiveChat = function () {
     var initialize = function initialize() {
         if (window.LiveChatWidget) {
             window.LiveChatWidget.on('ready', function () {
-                window.LiveChatWidget.call('set_session_variables', session_variables);
+                setSessionVariables();
                 if (!ClientBase.isLoggedIn()) {
                     window.LC_API.on_chat_ended = function () {
                         window.LiveChatWidget.call('set_customer_email', ' ');
@@ -14181,7 +14183,7 @@ var FormManager = function () {
                     } else if (/lbl_/.test(key)) {
                         value = field.value || field.$.text();
                     } else if (field.$.attr('class') === 'hide-product-checkbox') {
-                        value = field.$.is(':checked') ? 0 : 1;
+                        value = field.$.attr('class') === 'hide-product-checkbox' ? 1 : 0;
                     } else if (field.$.is(':checkbox')) {
                         value = field.$.is(':checked') ? 1 : 0;
                     } else if (Array.isArray(val)) {
