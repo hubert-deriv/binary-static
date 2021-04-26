@@ -695,6 +695,13 @@ var ClientBase = function () {
         return is_current ? currency && !get('is_virtual') && has_account_criteria && !isCryptocurrency(currency) : has_account_criteria;
     };
 
+    var isOptionsBlocked = function isOptionsBlocked() {
+        var options_blocked_countries = ['au'];
+        var country = State.getResponse('authorize.country');
+
+        return options_blocked_countries.includes(country);
+    };
+
     return {
         init: init,
         isLoggedIn: isLoggedIn,
@@ -705,6 +712,7 @@ var ClientBase = function () {
         getAccountType: getAccountType,
         isAccountOfType: isAccountOfType,
         isAuthenticationAllowed: isAuthenticationAllowed,
+        isOptionsBlocked: isOptionsBlocked,
         getAccountOfType: getAccountOfType,
         hasAccountType: hasAccountType,
         hasCurrencyType: hasCurrencyType,
@@ -9573,10 +9581,10 @@ var getHighestZIndex = function getHighestZIndex() {
     return all.length ? Math.max.apply(Math, all) : null;
 };
 
-var eu_countries = ['Italy', 'Germany', 'France', 'Luxembourg', 'Greece', 'Saint Martin', 'Spain', 'Slovakia', 'Lithuania', 'Netherlands', 'Austria', 'Bulgaria', 'Slovenia', 'Cyprus', 'Belgium', 'Romania', 'Croatia', 'Portugal', 'Poland', 'Latvia', 'Estonia', 'Czech Republic', 'Finland', 'Hungary', 'Denmark', 'Sweden', 'Ireland', 'Isle of Man', 'Great Britain', 'Malta'];
+var eu_countries = ['it', 'de', 'fr', 'lu', 'gr', 'mf', 'es', 'sk', 'lt', 'nl', 'at', 'bg', 'si', 'cy', 'be', 'ro', 'hr', 'pt', 'pl', 'lv', 'ee', 'cz', 'fi', 'hu', 'dk', 'se', 'ie', 'im', 'gb', 'mt'];
 // check if client is from EU
-var isEuCountry = function isEuCountry(country) {
-    return eu_countries.includes(country);
+var isEuCountrySelected = function isEuCountrySelected(selected_country) {
+    return eu_countries.includes(selected_country);
 };
 
 var downloadCSV = function downloadCSV(csv_contents) {
@@ -9806,7 +9814,7 @@ module.exports = {
     template: template,
     isBinaryDomain: isBinaryDomain,
     isEmptyObject: isEmptyObject,
-    isEuCountry: isEuCountry,
+    isEuCountrySelected: isEuCountrySelected,
     isLoginPages: isLoginPages,
     cloneObject: cloneObject,
     isDeepEqual: isDeepEqual,
@@ -9955,6 +9963,9 @@ var BinaryLoader = function () {
         },
         no_mf: function no_mf() {
             return localize('Sorry, but binary options trading is not available in your financial account.');
+        },
+        options_blocked: function options_blocked() {
+            return localize('Sorry, but binary options trading is not available in your country.');
         }
     };
 
@@ -9991,6 +10002,11 @@ var BinaryLoader = function () {
                 return displayMessage(error_messages.no_mf());
             });
         }
+        if (config.no_blocked_country && Client.isLoggedIn() && Client.isOptionsBlocked()) {
+            BinarySocket.wait('authorize').then(function () {
+                return displayMessage(error_messages.options_blocked());
+            });
+        }
 
         BinarySocket.setOnDisconnect(active_script.onDisconnect);
     };
@@ -10014,7 +10030,7 @@ var BinaryLoader = function () {
             return;
         }
 
-        var div_container = createElement('div', { class: 'logged_out_title_container', html: Client.isAccountOfType('financial') ? '' : content.getElementsByTagName('h1')[0] || '' });
+        var div_container = createElement('div', { class: 'logged_out_title_container', html: Client.isAccountOfType('financial') || Client.isOptionsBlocked() ? '' : content.getElementsByTagName('h1')[0] || '' });
         var div_notice = createElement('p', { class: 'center-text notice-msg', html: localized_message });
 
         div_container.appendChild(div_notice);
@@ -10209,7 +10225,7 @@ var pages_config = {
     statementws: { module: Statement, is_authenticated: true, needs_currency: true },
     tnc_approvalws: { module: TNCApproval, is_authenticated: true, only_real: true },
     top_up_virtualws: { module: TopUpVirtual, is_authenticated: true, only_virtual: true },
-    trading: { module: TradePage, needs_currency: true, no_mf: true },
+    trading: { module: TradePage, needs_currency: true, no_mf: true, no_blocked_country: true },
     transferws: { module: PaymentAgentTransfer, is_authenticated: true, only_real: true },
     two_factor_authentication: { module: TwoFactorAuthentication, is_authenticated: true },
     virtualws: { module: VirtualAccOpening, not_authenticated: true },
@@ -11021,7 +11037,7 @@ var Header = function () {
 
     var logoOnClick = function logoOnClick() {
         if (Client.isLoggedIn()) {
-            var url = Client.isAccountOfType('financial') ? Url.urlFor('user/metatrader') : Client.defaultRedirectUrl();
+            var url = Client.isAccountOfType('financial') || Client.isOptionsBlocked() ? Url.urlFor('user/metatrader') : Client.defaultRedirectUrl();
             BinaryPjax.load(url);
         } else {
             BinaryPjax.load(Url.urlFor(''));
@@ -11588,7 +11604,7 @@ var LoggedInHandler = function () {
             if (set_default) {
                 var lang_cookie = urlLang(redirect_url) || Cookies.get('language');
                 var language = getLanguage();
-                redirect_url = Client.isAccountOfType('financial') ? urlFor('user/metatrader') : Client.defaultRedirectUrl();
+                redirect_url = Client.isAccountOfType('financial') || Client.isOptionsBlocked() ? urlFor('user/metatrader') : Client.defaultRedirectUrl();
                 if (lang_cookie && lang_cookie !== language) {
                     redirect_url = redirect_url.replace(new RegExp('/' + language + '/', 'i'), '/' + lang_cookie.toLowerCase() + '/');
                 }
@@ -13690,6 +13706,7 @@ var updateTabDisplay = __webpack_require__(/*! ../../_common/tab_selector */ "./
 var visible_classname = 'data-show-visible';
 var mt_company_rule = 'mtcompany';
 var eu_country_rule = 'eucountry';
+var options_blocked_rule = 'optionsblocked';
 
 var ContentVisibility = function () {
     var $center_select_m = void 0;
@@ -13797,6 +13814,7 @@ var ContentVisibility = function () {
         var rule_set_has_current = rule_set.has(current_landing_company_shortcode);
         var rule_set_has_mt = rule_set.has(mt_company_rule);
         var rule_set_has_eu_country = rule_set.has(eu_country_rule);
+        var options_blocked = rule_set.has(options_blocked_rule);
 
         var show_element = false;
 
@@ -13815,6 +13833,9 @@ var ContentVisibility = function () {
             if (arr_mt5fin_shortcodes.some(function (el) {
                 return mt5fin_rules.includes(el);
             })) show_element = !is_exclude;
+        }
+        if (options_blocked && Client.isOptionsBlocked()) {
+            show_element = !is_exclude;
         }
 
         return show_element;
@@ -14148,7 +14169,7 @@ var FormManager = function () {
 
         fields.forEach(function (field) {
             if (!field.exclude_request) {
-                if (field.$.attr('class') === 'hide-checkbox' || field.$.is(':visible') || field.value || field.$.attr('data-force')) {
+                if (field.$.attr('class') === 'hide-product-checkbox' || field.$.is(':visible') || field.value || field.$.attr('data-force')) {
                     val = field.$.val();
                     key = field.request_field || field.selector;
 
@@ -14159,7 +14180,7 @@ var FormManager = function () {
                         value = field.$.attr('data-value');
                     } else if (/lbl_/.test(key)) {
                         value = field.value || field.$.text();
-                    } else if (field.$.attr('class') === 'hide-checkbox') {
+                    } else if (field.$.attr('class') === 'hide-product-checkbox') {
                         value = field.$.is(':checked') ? 0 : 1;
                     } else if (field.$.is(':checkbox')) {
                         value = field.$.is(':checked') ? 1 : 0;
@@ -16378,6 +16399,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 var BinaryPjax = __webpack_require__(/*! ../../base/binary_pjax */ "./src/javascript/app/base/binary_pjax.js");
 var Client = __webpack_require__(/*! ../../base/client */ "./src/javascript/app/base/client.js");
 var BinarySocket = __webpack_require__(/*! ../../base/socket */ "./src/javascript/app/base/socket.js");
+var Header = __webpack_require__(/*! ../../base/header */ "./src/javascript/app/base/header.js");
 var Dialog = __webpack_require__(/*! ../../common/attach_dom/dialog */ "./src/javascript/app/common/attach_dom/dialog.js");
 var Currency = __webpack_require__(/*! ../../common/currency */ "./src/javascript/app/common/currency.js");
 var FormManager = __webpack_require__(/*! ../../common/form_manager */ "./src/javascript/app/common/form_manager.js");
@@ -16740,7 +16762,10 @@ var DepositWithdraw = function () {
                                 if (cashier_type === 'withdraw') {
                                     var limit = State.getResponse('get_limits.remainder');
                                     if (typeof limit !== 'undefined' && +limit < Currency.getMinWithdrawal(Client.get('currency'))) {
-                                        showError('custom_error', localize('You have reached the withdrawal limit.'));
+                                        showError('custom_error', localize('You have reached the withdrawal limit. Please upload your proof of identity and address to lift your withdrawal limit and proceed with your withdrawal.'));
+                                        BinarySocket.send({ get_account_status: 1 }).then(function () {
+                                            return Header.displayAccountStatus();
+                                        });
                                         return;
                                     }
                                 }
@@ -27616,6 +27641,7 @@ var Authenticate = function () {
 
             showCTAButton('document', 'pending');
             $('#upload_complete').setVisibility(1);
+            $('#msg_personal_details').setVisibility(0);
         });
     };
 
@@ -27761,6 +27787,7 @@ var Authenticate = function () {
             $('#authentication_loading').setVisibility(1);
             setTimeout(function () {
                 BinarySocket.send({ get_account_status: 1 }, { forced: true }).then(function () {
+                    $('#msg_personal_details').setVisibility(0);
                     $('#upload_complete').setVisibility(1);
                     Header.displayAccountStatus();
                     $('#authentication_loading').setVisibility(0);
@@ -27893,7 +27920,7 @@ var Authenticate = function () {
                             }
 
                             $('#personal_details_error').setVisibility(1);
-                            _context2.next = 64;
+                            _context2.next = 65;
                             break;
 
                         case 28:
@@ -27945,7 +27972,7 @@ var Authenticate = function () {
                                 });
                             }
 
-                            _context2.next = 64;
+                            _context2.next = 65;
                             break;
 
                         case 37:
@@ -27955,12 +27982,12 @@ var Authenticate = function () {
                             }
 
                             $('#limited_poi').setVisibility(1);
-                            _context2.next = 64;
+                            _context2.next = 65;
                             break;
 
                         case 41:
                             if (needs_verification.includes('identity')) {
-                                _context2.next = 63;
+                                _context2.next = 64;
                                 break;
                             }
 
@@ -27969,111 +27996,113 @@ var Authenticate = function () {
                                 Url.updateParamsWithoutReload({ authentication_tab: 'poa' }, true);
                             }
                             _context2.t0 = identity.status;
-                            _context2.next = _context2.t0 === 'none' ? 46 : _context2.t0 === 'pending' ? 48 : _context2.t0 === 'rejected' ? 51 : _context2.t0 === 'verified' ? 53 : _context2.t0 === 'expired' ? 56 : _context2.t0 === 'suspected' ? 58 : 60;
+                            _context2.next = _context2.t0 === 'none' ? 46 : _context2.t0 === 'pending' ? 49 : _context2.t0 === 'rejected' ? 52 : _context2.t0 === 'verified' ? 54 : _context2.t0 === 'expired' ? 57 : _context2.t0 === 'suspected' ? 59 : 61;
                             break;
 
                         case 46:
+                            $('#msg_personal_details').setVisibility(1);
                             if (onfido_unsupported) {
                                 $('#not_authenticated_uns').setVisibility(1);
                                 initUnsupported();
                             } else {
                                 initOnfido(service_token_response.token, documents_supported, country_code);
                             }
-                            return _context2.abrupt('break', 61);
+                            return _context2.abrupt('break', 62);
 
-                        case 48:
+                        case 49:
                             showCTAButton('document', 'pending');
 
                             $('#upload_complete').setVisibility(1);
-                            return _context2.abrupt('break', 61);
+                            return _context2.abrupt('break', 62);
 
-                        case 51:
+                        case 52:
                             $('#unverified').setVisibility(1);
-                            return _context2.abrupt('break', 61);
+                            return _context2.abrupt('break', 62);
 
-                        case 53:
+                        case 54:
                             showCTAButton('document', 'verified');
                             $('#verified').setVisibility(1);
-                            return _context2.abrupt('break', 61);
+                            return _context2.abrupt('break', 62);
 
-                        case 56:
+                        case 57:
                             $('#expired_poi').setVisibility(1);
-                            return _context2.abrupt('break', 61);
+                            return _context2.abrupt('break', 62);
 
-                        case 58:
+                        case 59:
                             $('#unverified').setVisibility(1);
-                            return _context2.abrupt('break', 61);
-
-                        case 60:
-                            return _context2.abrupt('break', 61);
+                            return _context2.abrupt('break', 62);
 
                         case 61:
-                            _context2.next = 64;
+                            return _context2.abrupt('break', 62);
+
+                        case 62:
+                            _context2.next = 65;
                             break;
 
-                        case 63:
+                        case 64:
                             // eslint-disable-next-line no-lonely-if
                             if (onfido_unsupported) {
                                 $('#not_authenticated_uns').setVisibility(1);
                                 initUnsupported();
                             } else {
+                                $('#msg_personal_details').setVisibility(1);
                                 initOnfido(service_token_response.token, documents_supported, country_code);
                             }
 
-                        case 64:
+                        case 65:
                             if (needs_verification.includes('document')) {
-                                _context2.next = 86;
+                                _context2.next = 87;
                                 break;
                             }
 
                             _context2.t1 = document.status;
-                            _context2.next = _context2.t1 === 'none' ? 68 : _context2.t1 === 'pending' ? 71 : _context2.t1 === 'rejected' ? 74 : _context2.t1 === 'suspected' ? 76 : _context2.t1 === 'verified' ? 78 : _context2.t1 === 'expired' ? 81 : 83;
+                            _context2.next = _context2.t1 === 'none' ? 69 : _context2.t1 === 'pending' ? 72 : _context2.t1 === 'rejected' ? 75 : _context2.t1 === 'suspected' ? 77 : _context2.t1 === 'verified' ? 79 : _context2.t1 === 'expired' ? 82 : 84;
                             break;
 
-                        case 68:
+                        case 69:
                             init();
                             $('#not_authenticated').setVisibility(1);
-                            return _context2.abrupt('break', 84);
+                            return _context2.abrupt('break', 85);
 
-                        case 71:
+                        case 72:
                             showCTAButton('identity', 'pending');
                             $('#pending_poa').setVisibility(1);
-                            return _context2.abrupt('break', 84);
+                            return _context2.abrupt('break', 85);
 
-                        case 74:
+                        case 75:
                             $('#unverified_poa').setVisibility(1);
-                            return _context2.abrupt('break', 84);
+                            return _context2.abrupt('break', 85);
 
-                        case 76:
+                        case 77:
                             $('#unverified_poa').setVisibility(1);
-                            return _context2.abrupt('break', 84);
+                            return _context2.abrupt('break', 85);
 
-                        case 78:
+                        case 79:
                             showCTAButton('document', 'verified');
                             $('#verified_poa').setVisibility(1);
-                            return _context2.abrupt('break', 84);
+                            return _context2.abrupt('break', 85);
 
-                        case 81:
+                        case 82:
                             $('#expired_poa').setVisibility(1);
-                            return _context2.abrupt('break', 84);
-
-                        case 83:
-                            return _context2.abrupt('break', 84);
+                            return _context2.abrupt('break', 85);
 
                         case 84:
-                            _context2.next = 88;
+                            return _context2.abrupt('break', 85);
+
+                        case 85:
+                            _context2.next = 89;
                             break;
 
-                        case 86:
+                        case 87:
                             init();
                             $('#not_authenticated').setVisibility(1);
 
-                        case 88:
+                        case 89:
 
                             $('#authentication_loading').setVisibility(0);
                             TabSelector.updateTabDisplay();
 
-                        case 90:
+                        case 91:
                         case 'end':
                             return _context2.stop();
                     }
@@ -36204,7 +36233,7 @@ var LocalStore = __webpack_require__(/*! ../../../../_common/storage */ "./src/j
 var State = __webpack_require__(/*! ../../../../_common/storage */ "./src/javascript/_common/storage.js").State;
 var urlFor = __webpack_require__(/*! ../../../../_common/url */ "./src/javascript/_common/url.js").urlFor;
 var Utility = __webpack_require__(/*! ../../../../_common/utility */ "./src/javascript/_common/utility.js");
-var isEuCountry = __webpack_require__(/*! ../../../../_common/utility */ "./src/javascript/_common/utility.js").isEuCountry;
+var isEuCountrySelected = __webpack_require__(/*! ../../../../_common/utility */ "./src/javascript/_common/utility.js").isEuCountrySelected;
 var isBinaryApp = __webpack_require__(/*! ../../../../config */ "./src/javascript/config.js").isBinaryApp;
 
 var VirtualAccOpening = function () {
@@ -36271,22 +36300,20 @@ var VirtualAccOpening = function () {
             }
         }).setVisibility(1);
 
-        var get_selected_value = document.getElementById('select2-residence-container').getAttribute('title');
         var residence_dropdown = document.getElementById('residence');
-
-        if (!isEuCountry(get_selected_value)) {
-            email_consent.classList.add('hide-checkbox');
-            consent_checkbox.classList.add('hide-checkbox');
+        if (!isEuCountrySelected(residence_dropdown.value)) {
+            email_consent.classList.add('hide-product-checkbox');
+            consent_checkbox.classList.add('hide-product-checkbox');
         }
         residence_dropdown.onchange = function () {
-            var updated_selected_value = document.getElementById('select2-residence-container').getAttribute('title');
-            var eu_country = isEuCountry(updated_selected_value);
+            var updated_selected_value = document.getElementById('residence').value;
+            var eu_country = isEuCountrySelected(updated_selected_value);
             if (eu_country) {
-                email_consent.classList.remove('hide-checkbox');
-                consent_checkbox.classList.remove('hide-checkbox');
+                email_consent.classList.remove('hide-product-checkbox');
+                consent_checkbox.classList.remove('hide-product-checkbox');
             } else {
-                email_consent.classList.add('hide-checkbox');
-                consent_checkbox.classList.add('hide-checkbox');
+                email_consent.classList.add('hide-product-checkbox');
+                consent_checkbox.classList.add('hide-product-checkbox');
             }
         };
     };
