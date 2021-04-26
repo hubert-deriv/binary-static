@@ -13,7 +13,7 @@ const LocalStore               = require('../../../../_common/storage').LocalSto
 const State                    = require('../../../../_common/storage').State;
 const urlFor                   = require('../../../../_common/url').urlFor;
 const Utility                  = require('../../../../_common/utility');
-const isEuCountryNoIp          = require('../../../../_common/utility').isEuCountryNoIp;
+const isEuCountrySelected         = require('../../../../_common/utility').isEuCountrySelected;
 const isBinaryApp              = require('../../../../config').isBinaryApp;
 
 const VirtualAccOpening = (() => {
@@ -76,13 +76,13 @@ const VirtualAccOpening = (() => {
             .setVisibility(1);
             
         const residence_dropdown = document.getElementById('residence');
-        if (!isEuCountryNoIp(residence_dropdown.value)) {
+        if (!isEuCountrySelected(residence_dropdown.value)) {
             email_consent.classList.add('hide-product-checkbox');
             consent_checkbox.classList.add('hide-product-checkbox');
         }
         residence_dropdown.onchange = () => {
             const updated_selected_value = document.getElementById('residence').value;
-            const eu_country = isEuCountryNoIp(updated_selected_value);
+            const eu_country = isEuCountrySelected(updated_selected_value);
             if (eu_country) {
                 email_consent.classList.remove('hide-product-checkbox');
                 consent_checkbox.classList.remove('hide-product-checkbox');
