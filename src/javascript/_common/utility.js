@@ -73,7 +73,7 @@ const eu_countries = [
     'mt',
 ];
 // check if client is from EU
-const isEuCountrySelected = country => eu_countries.includes(country);
+const isEuCountrySelected = selected_country => eu_countries.includes(selected_country);
 
 const downloadCSV = (csv_contents, filename = 'data.csv') => {
     if (navigator.msSaveBlob) { // IE 10+
