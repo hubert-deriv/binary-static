@@ -1,7 +1,7 @@
-const BinaryPjax        = require('../../base/binary_pjax');
-const Client            = require('../../base/client');
-const BinarySocket      = require('../../base/socket');
-const Url               = require('../../../_common/url');
+const BinaryPjax   = require('../../base/binary_pjax');
+const Client       = require('../../base/client');
+const BinarySocket = require('../../base/socket');
+const Url          = require('../../../_common/url');
 
 const PaymentAgentList = (() => {
     let $pa_list_container,
