@@ -402,6 +402,14 @@ _:-ms-fullscreen, :root #content-holder {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center; }
+  @media (max-width: 767px) {
+    #email_consent + label {
+      display: inline-block;
+      left: 50%;
+      -webkit-transform: translate(-50%);
+              transform: translate(-50%); }
+      #email_consent + label:before {
+        margin-bottom: 4px; } }
 
 input[type=checkbox] {
   margin: 5px 5px 5px 0;
