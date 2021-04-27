@@ -354,15 +354,9 @@ _:-ms-fullscreen, :root #content-holder {
 #email_consent + label {
     display: flex;
     justify-content: center;
-    align-items: center;
-    @media (max-width: 767px) {
-        display: inline-block;
-        left: 50%;
-        transform: translate(-50%);
 
-        &:before {
-            margin-bottom: 4px;
-        }
+    &:before {
+        margin-top: 4px;
     }
 }
 
