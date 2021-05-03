@@ -394,7 +394,7 @@ const PersonalDetails = (() => {
                 if (residence) {
                     if (shouldShowTax(get_settings_data)) {
                         $tax_residence = $('#tax_residence');
-                        $tax_residence.html($options_with_disabled.html()).promise().done(() => {
+                        $tax_residence.html($options.html()).promise().done(() => {
                             setTimeout(() => {
                                 const residence_value = get_settings_data.tax_residence ?
                                     get_settings_data.tax_residence.split(',') : residence || '';
