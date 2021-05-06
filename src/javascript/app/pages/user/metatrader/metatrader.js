@@ -47,9 +47,7 @@ const MetaTrader = (() => {
 
     const displayResidenceList = () => {
         BinarySocket.send({ residence_list: 1 }).then(response => {
-            populateResidence(response).then(() => {
-                $('#place_of_birth, #citizen').select2();
-            });
+            populateResidence(response);
         });
     };
 
@@ -351,13 +349,8 @@ const MetaTrader = (() => {
                         }
                         MetaTraderUI.enableButton(action, response);
                     } else {
-<<<<<<< HEAD
                         await BinarySocket.send({ get_account_status: 1, get_settings: 1 });
-                        if (accounts_info[acc_type] && accounts_info[acc_type].info) {
-=======
-                        await BinarySocket.send({ get_account_status: 1 });
                         if (getAccountsInfo(acc_type) && getAccountsInfo(acc_type).info) {
->>>>>>> 775de8866594d3e6155ed92bfcec89c0bd78d643
                             const parent_action = /password/.test(action) ? 'manage_password' : 'cashier';
                             if (parent_action === 'cashier') {
                                 await BinarySocket.send({ get_limits: 1 });
