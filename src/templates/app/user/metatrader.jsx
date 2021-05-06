@@ -294,6 +294,15 @@ const Metatrader = () => (
                             <div id='view_3' className='gr-row invisible'>
                                 <div className='container gr-8 gr-12-m'>
                                     <FormRow
+                                        is_two_rows
+                                        type='select'
+                                        label={it.L('Tax residence')}
+                                        tooltip={it.L('Please select the country where you are a tax resident. If you have any doubts, kindly consult your tax advisor.')}
+                                        id='tax_residence'
+                                        row_id='row_tax_residence'
+                                        attributes={{ single: 'single' }}
+                                    />
+                                    <FormRow
                                         autoComplete='new-password'
                                         is_two_rows
                                         has_password_meter
