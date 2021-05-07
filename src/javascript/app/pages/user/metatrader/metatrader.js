@@ -333,6 +333,8 @@ const MetaTrader = (() => {
                 }
 
                 const req = makeRequestObject(acc_type, action);
+                const STP_not_selected = $('.template_real #rbtn_financial_financial_stp.selected').length === 0;
+                if (STP_not_selected) delete req.country;
                 BinarySocket.send(req).then(async (response) => {
                     if (response.error) {
                         MetaTraderUI.displayFormMessage(response.error.message, action);

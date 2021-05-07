@@ -353,6 +353,7 @@ const MetaTraderConfig = (() => {
             txt_main_pass    : { id: '#txt_main_pass',     request_field: 'mainPassword' },
             ddl_trade_server : { id: '#ddl_trade_server', is_radio: true },
             chk_tnc          : { id: '#chk_tnc' },
+            tax_residence    : { id: '#tax_residence',     request_field: 'country' },
             additional_fields: acc_type => {
                 const sample_account = getSampleAccount(acc_type);
                 const is_demo = /^demo_/.test(acc_type);
