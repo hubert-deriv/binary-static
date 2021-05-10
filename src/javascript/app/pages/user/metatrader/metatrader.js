@@ -28,7 +28,7 @@ const MetaTrader = (() => {
 
     const onLoad = () => {
         BinarySocket.send({ statement: 1, limit: 1 });
-        BinarySocket.wait('landing_company', 'get_account_status', 'statement', 'get_settings').then(async () => {
+        BinarySocket.wait('landing_company', 'get_account_status', 'statement').then(async () => {
             init();
             await BinarySocket.send({ trading_servers: 1, platform: 'mt5' });
 
