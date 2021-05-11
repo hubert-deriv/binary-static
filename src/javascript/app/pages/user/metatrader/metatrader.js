@@ -4,7 +4,6 @@ const Client             = require('../../../base/client');
 const BinarySocket       = require('../../../base/socket');
 const setCurrencies      = require('../../../common/currency').setCurrencies;
 const Validation         = require('../../../common/form_validation');
-const CommonFunctions    = require('../../../../_common/common_functions');
 const localize           = require('../../../../_common/localize').localize;
 const State              = require('../../../../_common/storage').State;
 const applyToAllElements = require('../../../../_common/utility').applyToAllElements;
