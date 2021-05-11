@@ -645,7 +645,6 @@ const MetaTraderUI = (() => {
         current_action_ui = action;
 
         // const get_financial_container = $('#rbtn_financial_financial.selected').length === 0 ? true : false;
-        const get_next_button = $('#frm_new_account .btn-next');
         const is_new_account = /new_account/.test(action);
         const $acc_actions = $container.find('.acc-actions');
         $acc_actions.find('.new-account').setVisibility(is_new_account);
@@ -661,16 +660,6 @@ const MetaTraderUI = (() => {
             $target.addClass('selected');
             return;
         }
-
-        get_next_button.on('click', () => {
-            const get_tax_row = $('#row_tax_residence');
-            const STP_not_selected = $('.template_real #rbtn_financial_financial_stp.selected').length === 0;
-            if (STP_not_selected) {
-                get_tax_row.setVisibility(0);
-            } else {
-                get_tax_row.setVisibility(1);
-            }
-        });
 
         // is_new_account
         displayAccountDescription();

@@ -17,19 +17,9 @@ const MetaTrader = (() => {
     const fields          = MetaTraderConfig.fields;
     const getAccountsInfo = MetaTraderConfig.getAccountsInfo;
 
-    let residence,
-        get_settings_data,
-        $tax_residence;
-
-    const init = () => {
-        get_settings_data = {};
-        residence         = Client.get('residence');
-    };
-
     const onLoad = () => {
         BinarySocket.send({ statement: 1, limit: 1 });
         BinarySocket.wait('landing_company', 'get_account_status', 'statement').then(async () => {
-            init();
             await BinarySocket.send({ trading_servers: 1, platform: 'mt5' });
 
             if (isEligible()) {
@@ -41,45 +31,8 @@ const MetaTrader = (() => {
             } else {
                 MetaTraderUI.displayPageError(localize('Sorry, this feature is not available in your jurisdiction.'));
             }
-            displayResidenceList();
         });
     };
-
-    const displayResidenceList = () => {
-        BinarySocket.send({ residence_list: 1 }).then(response => {
-            populateResidence(response);
-        });
-    };
-
-    const populateResidence = (response) => (
-        new Promise((resolve) => {
-            const residence_list = response.residence_list;
-            if (residence_list.length > 0) {
-                const $options               = $('<div/>');
-                const $options_with_disabled = $('<div/>');
-                residence_list.forEach((res) => {
-                    $options.append(CommonFunctions.makeOption({ text: res.text, value: res.value }));
-                    $options_with_disabled.append(CommonFunctions.makeOption({
-                        text       : res.text,
-                        value      : res.value,
-                        is_disabled: res.disabled,
-                    }));
-                });
-                $tax_residence = $('#tax_residence');
-                $tax_residence.html($options.html()).promise().done(() => {
-                    setTimeout(() => {
-                        const residence_value = get_settings_data.tax_residence ?
-                            get_settings_data.tax_residence.split(',') : residence || '';
-                        $tax_residence.select2()
-                            .val(residence_value)
-                            .trigger('change')
-                            .setVisibility(1);
-                    }, 500);
-                });
-            }
-            resolve();
-        })
-    );
 
     const isEligible = () => {
         const landing_company = State.getResponse('landing_company');
@@ -333,8 +286,6 @@ const MetaTrader = (() => {
                 }
 
                 const req = makeRequestObject(acc_type, action);
-                const STP_not_selected = $('.template_real #rbtn_financial_financial_stp.selected').length === 0;
-                if (STP_not_selected) delete req.country;
                 BinarySocket.send(req).then(async (response) => {
                     if (response.error) {
                         MetaTraderUI.displayFormMessage(response.error.message, action);
@@ -351,7 +302,7 @@ const MetaTrader = (() => {
                         }
                         MetaTraderUI.enableButton(action, response);
                     } else {
-                        await BinarySocket.send({ get_account_status: 1, get_settings: 1 });
+                        await BinarySocket.send({ get_account_status: 1 });
                         if (getAccountsInfo(acc_type) && getAccountsInfo(acc_type).info) {
                             const parent_action = /password/.test(action) ? 'manage_password' : 'cashier';
                             if (parent_action === 'cashier') {
