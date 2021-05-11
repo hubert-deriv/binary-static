@@ -45,12 +45,15 @@ const PersonalDetails = (() => {
     const checkStatus = (status, string) => status.findIndex(s => s === string) < 0 ? Boolean(false) : Boolean(true);
 
     const showHideTaxMessage = () => {
+        const $tax_info_declaration = $('#tax_information_declaration');
         if (Client.shouldCompleteTax()) {
             $('#tax_information_note_toggle').off('click').on('click', (e) => {
                 e.stopPropagation();
                 $('#tax_information_note_toggle').toggleClass('open');
                 $('#tax_information_note').slideToggle();
             });
+        } else {
+            $tax_info_declaration.setVisibility(0); // hide tax info declaration
         }
     };
 
