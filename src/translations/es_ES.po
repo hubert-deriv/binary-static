@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: binary-static\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-04-27 01:18\n"
+"PO-Revision-Date: 2021-05-10 03:32\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "MIME-Version: 1.0\n"
@@ -3128,8 +3128,8 @@ msgstr "Seguir operando"
 msgid "Continue with the verification"
 msgstr "Continúe con la verificación"
 
-msgid "Continuous Indices – Choose from the Volatility 10 Index, Volatility 25 Index, Volatility 50 Index, Volatility 75 Index, and Volatility 100 Index. These indices correspond to simulated markets with constant volatilities of 10%, 25%, 50%, 75%, and 100% respectively."
-msgstr "Índices Continuos: Elija entre Índice de Volatilidad 10, Índice de Volatilidad 25, Índice de Volatilidad 50, Índice de Volatilidad 75 e Índice de Volatilidad 100. Estos índices corresponden a mercados simulados con volatilidad constante del 10%, 25%, 50%, 75% y 100% respectivamente."
+msgid "Continuous Indices – Choose from the Volatility 10 (1s) Index, Volatility 25 (1s) Index, Volatility 50 (1s) Index, Volatility 75 (1s) Index, Volatility 100 (1s) Index, Volatility 10 Index, Volatility 25 Index, Volatility 50 Index, Volatility 75 Index, and Volatility 100 Index. These indices correspond to simulated markets with constant volatilities of 10%, 25%, 50%, 75%, and 100% respectively."
+msgstr "Índices continuos – Escoja entre los índices Volatility 10 (1s), Volatility 25 (1s), Volatility 50 (1s), Volatility 75 (1s), Volatility 100 (1s), Volatility 10, Volatility 25, Volatility 50, Volatility 75 y Volatility 100. Estos índices corresponden a mercados simulados con volatilidades constantes de 10%, 25%, 50%, 75% y 100%, respectivamente."
 
 msgid "Contract"
 msgstr "Contrato"
@@ -5728,6 +5728,9 @@ msgstr "Quiero abrir otra cuenta de criptomonedas"
 
 msgid "I want to reapply"
 msgstr "Quiero solicitar de nuevo"
+
+msgid "I want to receive updates on %1 products, services, and events."
+msgstr "Quiero recibir actualizaciones sobre %1 productos, servicios y eventos."
 
 msgid "I want to set my currency instead"
 msgstr "Quiero configurar mi moneda"
@@ -9420,9 +9423,6 @@ msgstr "Reciba correos electrónicos sobre productos, servicios y eventos de %1.
 msgid "Receive instant prices based on your position."
 msgstr "Reciba precios instantáneamente sobre su posición."
 
-msgid "Receive news and special offers"
-msgstr "Reciba noticias y ofertas especiales"
-
 msgid "Receive prices that are benchmarked against interbank rates."
 msgstr "Reciba precios comparados con las tasas interbancarias."
 
@@ -10264,7 +10264,7 @@ msgid "Sorry, an error occurred while processing your request."
 msgstr "Lo sentimos, ha ocurrido un error mientras se procesaba su solicitud."
 
 msgid "Sorry, but binary options trading is not available in your country."
-msgstr ""
+msgstr "Lo sentimos, pero el trading con opciones binarias no está disponible en su país."
 
 msgid "Sorry, but binary options trading is not available in your financial account."
 msgstr "Lo sentimos, pero el comercio de opciones binarias no está disponible en su cuenta financiera."
@@ -13601,6 +13601,9 @@ msgstr "Virtual"
 
 msgid "Virtual Account"
 msgstr "Cuenta virtual"
+
+msgid "Virtual accounts do not have Payment Agent services."
+msgstr "Las cuentas virtuales no cuentan con servicios de Agente de pago."
 
 msgid "Visa is an international company that supports digital payments around the world, most commonly through their brand of credit and debit cards. For more information, please visit %1."
 msgstr "Visa es una compañía internacional que admite pagos digitales en todo el mundo, comúnmente a través de su marca de tarjetas de crédito y débito. Para más información, visite %1."
