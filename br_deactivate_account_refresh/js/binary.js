@@ -29610,6 +29610,7 @@ var Metatrader = __webpack_require__(/*! ../../metatrader/metatrader */ "./src/j
 var BinarySocket = __webpack_require__(/*! ../../../../base/socket */ "./src/javascript/app/base/socket.js");
 var Client = __webpack_require__(/*! ../../../../base/client */ "./src/javascript/app/base/client.js");
 var Currency = __webpack_require__(/*! ../../../../common/currency */ "./src/javascript/app/common/currency.js");
+var GTM = __webpack_require__(/*! ../../../../../_common/base/gtm */ "./src/javascript/_common/base/gtm.js");
 var localize = __webpack_require__(/*! ../../../../../_common/localize */ "./src/javascript/_common/localize.js").localize;
 var Url = __webpack_require__(/*! ../../../../../_common/url */ "./src/javascript/_common/url.js");
 var isCryptocurrency = __webpack_require__(/*! ../../../../../_common/base/currency_base */ "./src/javascript/_common/base/currency_base.js").isCryptocurrency;
@@ -30009,7 +30010,7 @@ var AccountClosure = function () {
 
                             case 9:
                                 $btn_submit.attr('disabled', false);
-                                _context2.next = 23;
+                                _context2.next = 24;
                                 break;
 
                             case 12:
@@ -30024,13 +30025,24 @@ var AccountClosure = function () {
                                 $.scrollTo(0, 500);
 
                                 sessionStorage.setItem('closingAccount', 1);
+
+                                // If the user clicks on a link while not having been logged out yet, log the user out.
+                                $('a').on('click', function () {
+                                    BinarySocket.send({ logout: '1' }).then(function (user) {
+                                        $('.client_logged_in, #client-logged-in, #topbar-msg').setVisibility(0);
+                                        if (user.logout === 1) {
+                                            GTM.pushDataLayer({ event: 'log_out' });
+                                        }
+                                    });
+                                });
+
                                 setTimeout(function () {
                                     // we need to clear all stored client data by performing a logout action and then redirect to home
                                     // otherwise it will think that client is still logged in and redirect to trading page
                                     Client.sendLogoutRequest(false, Url.urlFor('home'));
                                 }, 10000);
 
-                            case 23:
+                            case 24:
                             case 'end':
                                 return _context2.stop();
                         }
