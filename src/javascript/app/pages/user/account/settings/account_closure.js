@@ -4,6 +4,7 @@ const Metatrader                   = require('../../metatrader/metatrader');
 const BinarySocket                 = require('../../../../base/socket');
 const Client                       = require('../../../../base/client');
 const Currency                     = require('../../../../common/currency');
+const GTM                          = require('../../../../../_common/base/gtm');
 const localize                     = require('../../../../../_common/localize').localize;
 const Url                          = require('../../../../../_common/url');
 const isCryptocurrency             = require('../../../../../_common/base/currency_base').isCryptocurrency;
@@ -379,6 +380,17 @@ const AccountClosure = (() => {
                 $.scrollTo(0, 500);
 
                 sessionStorage.setItem('closingAccount', 1);
+
+                // If the user clicks on a link while not having been logged out yet, log the user out.
+                $('a').on('click', () => {
+                    BinarySocket.send({ logout: '1' }).then((user) => {
+                        $('.client_logged_in, #client-logged-in, #topbar-msg').setVisibility(0);
+                        if (user.logout === 1) {
+                            GTM.pushDataLayer({ event: 'log_out' });
+                        }
+                    });
+                });
+
                 setTimeout(() => {
                     // we need to clear all stored client data by performing a logout action and then redirect to home
                     // otherwise it will think that client is still logged in and redirect to trading page
