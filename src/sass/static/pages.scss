@@ -1624,6 +1624,35 @@ body #not_authenticated_financial ul.checked > li {
     }
 }
 
+#msg_main.close-account {
+    height: 25vh;
+
+    .msg_main_modal {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 5;
+
+        .notice-msg {
+            top: 25%;
+            width: 22.5em;
+            height: auto;
+            padding: 1em;
+            right: 50%;
+            transform: translateX(50%);
+            position: absolute;
+            @media (max-width: 500px) {
+                width: 13em;
+            }
+        }
+    }
+}
+
 .account-closure {
     &-form {
         text-align: left;
