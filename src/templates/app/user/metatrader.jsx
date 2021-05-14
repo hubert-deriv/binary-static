@@ -304,7 +304,7 @@ const Metatrader = () => (
                                     />
                                     <div id='view_3-buttons' className='gr-padding-10 center-text'>
                                         <a className='button button-secondary btn-back' href='javascript:;'>
-                                            <span>{it.L('Back')}</span>
+                                            <span>{it.L('Cancel')}</span>
                                         </a>
                                         <button id='btn_submit_new_account' type='submit' action='new_account'>
                                             {it.L('Create account')}
@@ -321,7 +321,7 @@ const Metatrader = () => (
                                     <div id='ddl_trade_server' type='radio' />
                                     <div id='view_2-buttons' className='gr-padding-10 center-text'>
                                         <a className='button button-secondary btn-back' href='javascript:;'>
-                                            <span>{it.L('Back')}</span>
+                                            <span>{it.L('Cancel')}</span>
                                         </a>
                                         <a className='button btn-next' href='javascript:;'>
                                             <span>{it.L('Next')}</span>
