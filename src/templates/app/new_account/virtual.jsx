@@ -25,10 +25,11 @@ const Virtual = () => (
                     </p>
                 </div>
             </Fieldset>
-            <div id='consent_checkbox'>
+            <div id='consent_checkbox' className='hide-product-checkbox'>
                 <FormRow
                     type='checkbox'
                     id='email_consent'
+                    className='hide-product-checkbox'
                     label_row_id='email_consent_label'
                     label={it.L('I want to receive updates on [_1] products, services, and events.', it.website_name)}
                 />

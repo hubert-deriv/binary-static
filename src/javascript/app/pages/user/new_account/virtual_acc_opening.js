@@ -76,9 +76,9 @@ const VirtualAccOpening = (() => {
             .setVisibility(1);
             
         const residence_dropdown = $('#residence');
-        if (!isEuCountrySelected(residence_dropdown.val())) {
-            email_consent.addClass('hide-product-checkbox');
-            consent_checkbox.addClass('hide-product-checkbox');
+        if (isEuCountrySelected(residence_dropdown.val())) {
+            email_consent.removeClass('hide-product-checkbox');
+            consent_checkbox.removeClass('hide-product-checkbox');
         }
         residence_dropdown.on('change', () => {
             const updated_selected_value = $('#residence').val();
