@@ -370,12 +370,12 @@ const AccountClosure = (() => {
             } else {
                 $submit_loading.setVisibility(0);
                 $closure_container.setVisibility(0);
-                $success_msg.setVisibility(1);
                 $('.client_logged_in, #client-logged-in, #topbar-msg').setVisibility(0);
-                $('#menu-top').removeClass('smaller-font top-nav-menu');
+                $success_msg.setVisibility(1);
                 $('.client_logged_out').setVisibility(1);
-                $('topbar').addClass('primary-bg-color-dark');
-                $('topbar').removeClass('secondary-bg-color');
+                $('#topbar').addClass('primary-bg-color-dark');
+                $('#menu-top').removeClass('smaller-font top-nav-menu');
+                $('#topbar').removeClass('secondary-bg-color');
                 $.scrollTo(0, 500);
 
                 sessionStorage.setItem('closingAccount', 1);
