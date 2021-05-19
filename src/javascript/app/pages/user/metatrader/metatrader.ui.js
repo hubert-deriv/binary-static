@@ -644,7 +644,6 @@ const MetaTraderUI = (() => {
     const handleNewAccountUI = (action, acc_type, $target) => {
         current_action_ui = action;
 
-        // const get_financial_container = $('#rbtn_financial_financial.selected').length === 0 ? true : false;
         const is_new_account = /new_account/.test(action);
         const $acc_actions = $container.find('.acc-actions');
         $acc_actions.find('.new-account').setVisibility(is_new_account);

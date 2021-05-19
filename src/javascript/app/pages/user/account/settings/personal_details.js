@@ -165,7 +165,6 @@ const PersonalDetails = (() => {
             displayChangeableFields(data);
             $(real_acc_elements).setVisibility(1);
             showHideTaxMessage();
-            CommonFunctions.getElementById('tax_information_form').setVisibility(1);
             if (is_fully_authenticated) {
                 $(real_acc_auth_elements).setVisibility(1);
             }
