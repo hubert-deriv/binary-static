@@ -1624,7 +1624,7 @@ body #not_authenticated_financial ul.checked > li {
     }
 }
 
-#msg_main.close-account {
+.close-user-account {
     height: 25vh;
 
     .msg_main_modal {
@@ -1640,14 +1640,14 @@ body #not_authenticated_financial ul.checked > li {
 
         .notice-msg {
             top: 25%;
-            width: 22.5em;
+            width: 22.5rem;
             height: auto;
-            padding: 1em;
+            padding: 1rem;
             right: 50%;
             transform: translateX(50%);
             position: absolute;
             @media (max-width: 500px) {
-                width: 13em;
+                width: 13rem;
             }
         }
     }

@@ -368,17 +368,13 @@ const AccountClosure = (() => {
                 }
                 $btn_submit.attr('disabled', false);
             } else {
+                sessionStorage.setItem('closingAccount', 1);
+                Client.activateByClientType();
+
                 $submit_loading.setVisibility(0);
                 $closure_container.setVisibility(0);
-                $('.client_logged_in, #client-logged-in, #topbar-msg').setVisibility(0);
                 $success_msg.setVisibility(1);
-                $('.client_logged_out').setVisibility(1);
-                $('#topbar').addClass('primary-bg-color-dark');
-                $('#menu-top').removeClass('smaller-font top-nav-menu');
-                $('#topbar').removeClass('secondary-bg-color');
                 $.scrollTo(0, 500);
-
-                sessionStorage.setItem('closingAccount', 1);
 
                 $('.close_main_modal').on('click', () => {
                     Client.sendLogoutRequest(false, Url.urlFor('home'));

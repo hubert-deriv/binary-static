@@ -88,7 +88,7 @@ const AccountClosure = () => (
         <div id='logged_out' className='invisible'>
             <h1>{it.L('Account Closure')}</h1>
         </div>
-        <div id='msg_main' className='center-text gr-gutter gr-padding-30 invisible close-account'>
+        <div id='msg_main' className='center-text gr-gutter gr-padding-30 invisible close-user-account'>
             <div className='msg_main_modal'>
                 <div className='notice-msg'>
                     <p>
