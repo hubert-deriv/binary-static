@@ -77,17 +77,19 @@ const VirtualAccOpening = (() => {
             
         const residence_dropdown = $('#residence');
         if (isEuCountrySelected(residence_dropdown.val())) {
-            email_consent.removeClass('hide-product-checkbox');
+            email_consent.removeClass('validate-hidden-product-checkbox');
             consent_checkbox.removeClass('hide-product-checkbox');
+        } else {
+            email_consent.addClass('validate-hidden-product-checkbox');
         }
         residence_dropdown.on('change', () => {
             const updated_selected_value = $('#residence').val();
             const eu_country = isEuCountrySelected(updated_selected_value);
             if (eu_country) {
-                email_consent.removeClass('hide-product-checkbox');
+                email_consent.removeClass('validate-hidden-product-checkbox');
                 consent_checkbox.removeClass('hide-product-checkbox');
             } else {
-                email_consent.addClass('hide-product-checkbox');
+                email_consent.addClass('validate-hidden-product-checkbox');
                 consent_checkbox.addClass('hide-product-checkbox');
             }
         });
