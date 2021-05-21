@@ -286,6 +286,7 @@ export const TaxInformationForm = () => (
                 <label htmlFor='chk_tax_id'>
                     {it.L('I hereby confirm that the tax information I provided is true and complete. I will also inform Deriv Investments (Europe) Limited about any changes to this information.')}
                 </label>
+                <span className='required_field_asterisk'>*</span>
             </div>
         </div>
     </React.Fragment>
