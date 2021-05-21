@@ -1657,8 +1657,10 @@ body #not_authenticated_financial ul.checked > li {
         z-index: 5;
 
         .notice-msg {
+            width: 29rem;
+            border-radius: 4px;
+            background-color: $COLOR_WHITE;
             top: 25%;
-            width: 22.5rem;
             height: auto;
             padding: 1rem;
             right: 50%;
