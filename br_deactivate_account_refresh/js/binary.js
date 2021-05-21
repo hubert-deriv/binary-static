@@ -10569,11 +10569,13 @@ var Client = function () {
     var activateByClientType = function activateByClientType(section_id) {
         var topbar_class = getElementById('topbar').classList;
         var el_section = section_id ? getElementById(section_id) : document.body;
+        var account_session = sessionStorage.getItem('closingAccount');
+        sessionStorage.setItem('closingAccount', 0);
 
         var primary_bg_color_dark = 'primary-bg-color-dark';
         var secondary_bg_color = 'secondary-bg-color';
 
-        if (ClientBase.isLoggedIn()) {
+        if (ClientBase.isLoggedIn() && parseInt(account_session) === 0) {
             BinarySocket.wait('authorize', 'website_status', 'get_account_status').then(function () {
                 var client_logged_in = getElementById('client-logged-in');
                 client_logged_in.classList.add('gr-centered');
@@ -11750,9 +11752,16 @@ var Menu = function () {
         }
     };
 
+    var makeMobileMenuOnResize = function makeMobileMenuOnResize() {
+        $(window).resize(function () {
+            makeMobileMenu();
+        });
+    };
+
     return {
         init: init,
-        makeMobileMenu: makeMobileMenu
+        makeMobileMenu: makeMobileMenu,
+        makeMobileMenuOnResize: makeMobileMenuOnResize
     };
 }();
 
@@ -11928,6 +11937,7 @@ var Page = function () {
             Footer.onLoad();
             Language.setCookie();
             Menu.makeMobileMenu();
+            Menu.makeMobileMenuOnResize();
             updateLinksURL('body');
             recordAffiliateExposure();
             endpointNotification();
@@ -26927,7 +26937,6 @@ var showLoadingImage = __webpack_require__(/*! ../../../../_common/utility */ ".
     To handle onfido unsupported country, we handle the functions separately,
     the name of the functions will be original name + uns abbreviation of `unsupported`
 */
-
 var Authenticate = function () {
     var is_any_upload_failed = false;
     var is_any_upload_failed_uns = false;
@@ -27780,9 +27789,15 @@ var Authenticate = function () {
                                                     }) ? {
                                                         country: country_code
                                                     } : false
-                                                }
+                                                },
+                                                useLiveDocumentCapture: true
                                             }
-                                        }, 'face']
+                                        }, {
+                                            type: 'face',
+                                            options: {
+                                                useLiveDocumentCapture: true
+                                            }
+                                        }]
                                     });
                                     $('#authentication_loading').setVisibility(0);
                                 } catch (err) {
@@ -29610,7 +29625,6 @@ var Metatrader = __webpack_require__(/*! ../../metatrader/metatrader */ "./src/j
 var BinarySocket = __webpack_require__(/*! ../../../../base/socket */ "./src/javascript/app/base/socket.js");
 var Client = __webpack_require__(/*! ../../../../base/client */ "./src/javascript/app/base/client.js");
 var Currency = __webpack_require__(/*! ../../../../common/currency */ "./src/javascript/app/common/currency.js");
-var GTM = __webpack_require__(/*! ../../../../../_common/base/gtm */ "./src/javascript/_common/base/gtm.js");
 var localize = __webpack_require__(/*! ../../../../../_common/localize */ "./src/javascript/_common/localize.js").localize;
 var Url = __webpack_require__(/*! ../../../../../_common/url */ "./src/javascript/_common/url.js");
 var isCryptocurrency = __webpack_require__(/*! ../../../../../_common/base/currency_base */ "./src/javascript/_common/base/currency_base.js").isCryptocurrency;
@@ -30010,39 +30024,23 @@ var AccountClosure = function () {
 
                             case 9:
                                 $btn_submit.attr('disabled', false);
-                                _context2.next = 24;
+                                _context2.next = 19;
                                 break;
 
                             case 12:
+                                sessionStorage.setItem('closingAccount', 1);
+                                Client.activateByClientType();
+
                                 $submit_loading.setVisibility(0);
                                 $closure_container.setVisibility(0);
                                 $success_msg.setVisibility(1);
-                                $('.client_logged_in, #client-logged-in, #topbar-msg').setVisibility(0);
-                                $('#menu-top').removeClass('smaller-font top-nav-menu');
-                                $('.client_logged_out').setVisibility(1);
-                                $('topbar').addClass('primary-bg-color-dark');
-                                $('topbar').removeClass('secondary-bg-color');
                                 $.scrollTo(0, 500);
 
-                                sessionStorage.setItem('closingAccount', 1);
-
-                                // If the user clicks on a link while not having been logged out yet, log the user out.
-                                $('a').on('click', function () {
-                                    BinarySocket.send({ logout: '1' }).then(function (user) {
-                                        $('.client_logged_in, #client-logged-in, #topbar-msg').setVisibility(0);
-                                        if (user.logout === 1) {
-                                            GTM.pushDataLayer({ event: 'log_out' });
-                                        }
-                                    });
+                                $('.close_main_modal').on('click', function () {
+                                    Client.sendLogoutRequest(false, Url.urlFor('home'));
                                 });
 
-                                setTimeout(function () {
-                                    // we need to clear all stored client data by performing a logout action and then redirect to home
-                                    // otherwise it will think that client is still logged in and redirect to trading page
-                                    Client.sendLogoutRequest(false, Url.urlFor('home'));
-                                }, 10000);
-
-                            case 24:
+                            case 19:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -34951,11 +34949,11 @@ var MetaTraderUI = function () {
         $mt5_web_link.attr('href', '' + mt5_url + query_params);
     };
 
-    var populateTradingServers = function populateTradingServers() {
+    var populateTradingServers = function populateTradingServers(acc_type) {
         var $ddl_trade_server = _$form.find('#ddl_trade_server');
 
         $ddl_trade_server.empty();
-        var account_type = newAccountGetType();
+        var account_type = acc_type || newAccountGetType();
         var num_servers = {
             disabled: 0,
             supported: 0,
@@ -35669,8 +35667,8 @@ var MetaTraderUI = function () {
         }
 
         // disable next button and Synthetic option if all servers are used or unavailable
-        var num_servers = populateTradingServers();
-        if (num_servers.supported === num_servers.used + num_servers.disabled) {
+        var num_servers = populateTradingServers('real_gaming_financial');
+        if (/real/.test(selected_acc_type) && num_servers.supported === num_servers.used + num_servers.disabled) {
             disableButtonLink('.btn-next');
             _$form.find('.step-2 #rbtn_gaming_financial').addClass('existed disabled');
         }

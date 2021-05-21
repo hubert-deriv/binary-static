@@ -1640,8 +1640,9 @@ body #not_authenticated_financial ul.checked > li {
 .authentication #onfido .onfido-sdk-ui-NavigationBar-back {
   background: transparent; }
 
-.authentication #onfido .onfido-sdk-ui-Button-button-primary:hover {
-  background: #353ff4; }
+.authentication #onfido .onfido-sdk-ui-crossDevice-CrossDeviceLink-numberInputSection .ods-button.-action--primary {
+  height: 100%;
+  font-size: 0.875em; }
 
 .authentication #onfido .onfido-sdk-ui-Button-button-outline:hover {
   background-color: transparent; }
@@ -1651,11 +1652,22 @@ body #not_authenticated_financial ul.checked > li {
   color: #000;
   border-radius: 0; }
 
+.authentication #onfido .onfido-sdk-ui-Theme-textButton:hover {
+  color: #000; }
+
+.authentication #onfido .onfido-sdk-ui-CustomFileInput-container .onfido-sdk-ui-Theme-button-lg {
+  background: #3640f5; }
+
+.authentication #onfido .onfido-sdk-ui-CustomFileInput-container button {
+  background: transparent; }
+  .authentication #onfido .onfido-sdk-ui-CustomFileInput-container button:hover {
+    background: #5c6cff; }
+
 .authentication #onfido input:hover, .authentication #onfido input:focus, .authentication #onfido textarea:hover, .authentication #onfido textarea:focus {
   outline: 0;
   border: none; }
 
-.authentication #onfido button:not(.onfido-sdk-ui-Theme-link):not(.onfido-sdk-ui-Button-button-primary):hover, .authentication #onfido button:not(.onfido-sdk-ui-Theme-link):not(.onfido-sdk-ui-Button-button-primary):focus {
+.authentication #onfido button:not(.onfido-sdk-ui-Theme-link):not(.ods-button):hover, .authentication #onfido button:not(.onfido-sdk-ui-Theme-link):not(.ods-button):focus {
   background-color: inherit; }
 
 .authentication .fields > .gr-row > div > .button {
@@ -2188,6 +2200,33 @@ body #not_authenticated_financial ul.checked > li {
     @media screen and (max-width: 931px) {
       .why-us-content .awards-section .horizontal-margin {
         margin: 15px 15px 20px; } }
+
+.close-user-account {
+  height: 25vh; }
+  .close-user-account .msg_main_modal {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5; }
+    .close-user-account .msg_main_modal .notice-msg {
+      width: 29rem;
+      border-radius: 4px;
+      background-color: #fff;
+      top: 25%;
+      height: auto;
+      padding: 1rem;
+      right: 50%;
+      -webkit-transform: translateX(50%);
+              transform: translateX(50%);
+      position: absolute; }
+      @media (max-width: 500px) {
+        .close-user-account .msg_main_modal .notice-msg {
+          width: 13rem; } }
 
 .account-closure-form {
   text-align: left;
