@@ -11750,9 +11750,16 @@ var Menu = function () {
         }
     };
 
+    var makeMobileMenuOnResize = function makeMobileMenuOnResize() {
+        $(window).resize(function () {
+            makeMobileMenu();
+        });
+    };
+
     return {
         init: init,
-        makeMobileMenu: makeMobileMenu
+        makeMobileMenu: makeMobileMenu,
+        makeMobileMenuOnResize: makeMobileMenuOnResize
     };
 }();
 
@@ -11928,6 +11935,7 @@ var Page = function () {
             Footer.onLoad();
             Language.setCookie();
             Menu.makeMobileMenu();
+            Menu.makeMobileMenuOnResize();
             updateLinksURL('body');
             recordAffiliateExposure();
             endpointNotification();
@@ -26927,7 +26935,6 @@ var showLoadingImage = __webpack_require__(/*! ../../../../_common/utility */ ".
     To handle onfido unsupported country, we handle the functions separately,
     the name of the functions will be original name + uns abbreviation of `unsupported`
 */
-
 var Authenticate = function () {
     var is_any_upload_failed = false;
     var is_any_upload_failed_uns = false;
@@ -27780,9 +27787,15 @@ var Authenticate = function () {
                                                     }) ? {
                                                         country: country_code
                                                     } : false
-                                                }
+                                                },
+                                                useLiveDocumentCapture: true
                                             }
-                                        }, 'face']
+                                        }, {
+                                            type: 'face',
+                                            options: {
+                                                useLiveDocumentCapture: true
+                                            }
+                                        }]
                                     });
                                     $('#authentication_loading').setVisibility(0);
                                 } catch (err) {
@@ -31352,7 +31365,6 @@ var PersonalDetails = function () {
             displayChangeableFields(data);
             $(real_acc_elements).setVisibility(1);
             showHideTaxMessage();
-            CommonFunctions.getElementById('tax_information_form').setVisibility(1);
             if (is_fully_authenticated) {
                 $(real_acc_auth_elements).setVisibility(1);
             }
@@ -33993,7 +34005,6 @@ var MetaTraderConfig = function () {
             txt_main_pass: { id: '#txt_main_pass', request_field: 'mainPassword' },
             ddl_trade_server: { id: '#ddl_trade_server', is_radio: true },
             chk_tnc: { id: '#chk_tnc' },
-            tax_residence: { id: '#tax_residence', request_field: 'country' },
             additional_fields: function additional_fields(acc_type) {
                 var sample_account = getSampleAccount(acc_type);
                 var is_demo = /^demo_/.test(acc_type);
@@ -34941,11 +34952,11 @@ var MetaTraderUI = function () {
         $mt5_web_link.attr('href', '' + mt5_url + query_params);
     };
 
-    var populateTradingServers = function populateTradingServers() {
+    var populateTradingServers = function populateTradingServers(acc_type) {
         var $ddl_trade_server = _$form.find('#ddl_trade_server');
 
         $ddl_trade_server.empty();
-        var account_type = newAccountGetType();
+        var account_type = acc_type || newAccountGetType();
         var num_servers = {
             disabled: 0,
             supported: 0,
@@ -35513,7 +35524,6 @@ var MetaTraderUI = function () {
     var handleNewAccountUI = function handleNewAccountUI(action, acc_type, $target) {
         current_action_ui = action;
 
-        // const get_financial_container = $('#rbtn_financial_financial.selected').length === 0 ? true : false;
         var is_new_account = /new_account/.test(action);
         var $acc_actions = $container.find('.acc-actions');
         $acc_actions.find('.new-account').setVisibility(is_new_account);
@@ -35660,8 +35670,8 @@ var MetaTraderUI = function () {
         }
 
         // disable next button and Synthetic option if all servers are used or unavailable
-        var num_servers = populateTradingServers();
-        if (num_servers.supported === num_servers.used + num_servers.disabled) {
+        var num_servers = populateTradingServers('real_gaming_financial');
+        if (/real/.test(selected_acc_type) && num_servers.supported === num_servers.used + num_servers.disabled) {
             disableButtonLink('.btn-next');
             _$form.find('.step-2 #rbtn_gaming_financial').addClass('existed disabled');
         }
