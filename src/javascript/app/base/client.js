@@ -25,13 +25,11 @@ const Client = (() => {
     const activateByClientType = (section_id) => {
         const topbar_class = getElementById('topbar').classList;
         const el_section   = section_id ? getElementById(section_id) : document.body;
-        const account_session = sessionStorage.getItem('closingAccount');
-        sessionStorage.setItem('closingAccount', 0);
 
         const primary_bg_color_dark = 'primary-bg-color-dark';
         const secondary_bg_color    = 'secondary-bg-color';
 
-        if (ClientBase.isLoggedIn() && parseInt(account_session) === 0) {
+        if (ClientBase.isLoggedIn()) {
             BinarySocket.wait('authorize', 'website_status', 'get_account_status').then(() => {
                 const client_logged_in = getElementById('client-logged-in');
                 client_logged_in.classList.add('gr-centered');

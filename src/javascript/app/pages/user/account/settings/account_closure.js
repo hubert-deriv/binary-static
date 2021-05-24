@@ -25,7 +25,6 @@ const AccountClosure = (() => {
         $crypto_1,
         $crypto_2,
         $virtual,
-        $success_msg,
         $error_msg;
 
     const onLoad = () => {
@@ -33,7 +32,6 @@ const AccountClosure = (() => {
         $closure_loading    = $('#closure_loading');
         $submit_loading     = $('#submit_loading');
         $closure_container  = $('#closure_container');
-        $success_msg        = $('#msg_main');
         $error_msg          = $('#msg_form');
         $trading_limit      = $('.trading_limit');
         $virtual            = $('.virtual');
@@ -368,17 +366,7 @@ const AccountClosure = (() => {
                 }
                 $btn_submit.attr('disabled', false);
             } else {
-                sessionStorage.setItem('closingAccount', 1);
-                Client.activateByClientType();
-
-                $submit_loading.setVisibility(0);
-                $closure_container.setVisibility(0);
-                $success_msg.setVisibility(1);
-                $.scrollTo(0, 500);
-
-                $('.close_main_modal').on('click', () => {
-                    Client.sendLogoutRequest(false, Url.urlFor('home'));
-                });
+                Client.sendLogoutRequest(false, Url.urlFor('deactivated-account'));
             }
         });
     };
