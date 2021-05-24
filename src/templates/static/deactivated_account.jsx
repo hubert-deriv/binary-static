@@ -1,15 +1,17 @@
 import React from 'react';
 
 const DeactivatedAccount = () => (
-    <div id='msg_main' className='center-text gr-gutter gr-padding-30 invisible close-user-account'>
+    <div id='msg_main' className='center-text gr-gutter gr-padding-30 close-user-account'>
         <div className='msg_main_modal'>
             <div className='notice-msg'>
-                <p>
+                <img className='responsive lock-deactivated-account' src={it.url_for('images/pages/deactivated_account/lock.svg')} alt='Lock image' />
+                <h1>
                     {it.L('We\'re sorry to see you leave.')}
-                    <br />
+                </h1>
+                <p>
                     {it.L('Your account is now deactivated.')}
-                    <br />
                 </p>
+                <br />
             </div>
         </div>
     </div>

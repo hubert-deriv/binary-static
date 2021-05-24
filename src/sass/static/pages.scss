@@ -1642,20 +1642,10 @@ body #not_authenticated_financial ul.checked > li {
     }
 }
 
-.closure-content .close-user-account {
+.deactivated-account-content .close-user-account {
     height: 25vh;
 
     .msg_main_modal {
-        position: fixed;
-        width: 100vw;
-        height: 100vh;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 5;
-
         .notice-msg {
             width: 29rem;
             border-radius: 4px;
@@ -1663,9 +1653,15 @@ body #not_authenticated_financial ul.checked > li {
             top: 25%;
             height: auto;
             padding: 1rem;
-            right: 50%;
-            transform: translateX(50%);
-            position: absolute;
+            margin: auto;
+
+            img {
+                width: 4rem;
+                margin-bottom: 1rem;
+            }
+            p {
+                font-weight: 500;
+            }
             @media (max-width: 500px) {
                 width: 13rem;
             }
