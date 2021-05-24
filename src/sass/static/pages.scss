@@ -1647,12 +1647,8 @@ body #not_authenticated_financial ul.checked > li {
 
     .msg_main_modal {
         .notice-msg {
-            width: 29rem;
-            border-radius: 4px;
-            background-color: $COLOR_WHITE;
-            top: 25%;
+            background-color: transparent;
             height: auto;
-            padding: 1rem;
             margin: auto;
 
             img {
@@ -1662,8 +1658,13 @@ body #not_authenticated_financial ul.checked > li {
             p {
                 font-weight: 500;
             }
+            h1 {
+                @media (max-width: 500px) {
+                    font-size: 30px;
+                }
+            }
             @media (max-width: 500px) {
-                width: 13rem;
+                width: 90%;
             }
         }
     }
