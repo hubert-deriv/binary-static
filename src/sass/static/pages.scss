@@ -1668,6 +1668,9 @@ body #not_authenticated_financial ul.checked > li {
             }
         }
     }
+    @media (max-width: 500px) {
+        margin-bottom: 5rem;
+    }
 }
 
 .account-closure {
