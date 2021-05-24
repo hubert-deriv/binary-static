@@ -11,7 +11,6 @@ const DeactivatedAccount = () => (
                 <p>
                     {it.L('Your account is now deactivated.')}
                 </p>
-                <br />
             </div>
         </div>
     </div>
