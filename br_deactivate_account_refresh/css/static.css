@@ -2201,9 +2201,9 @@ body #not_authenticated_financial ul.checked > li {
       .why-us-content .awards-section .horizontal-margin {
         margin: 15px 15px 20px; } }
 
-.close-user-account {
+.closure-content .close-user-account {
   height: 25vh; }
-  .close-user-account .msg_main_modal {
+  .closure-content .close-user-account .msg_main_modal {
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -2213,7 +2213,7 @@ body #not_authenticated_financial ul.checked > li {
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 5; }
-    .close-user-account .msg_main_modal .notice-msg {
+    .closure-content .close-user-account .msg_main_modal .notice-msg {
       width: 29rem;
       border-radius: 4px;
       background-color: #fff;
@@ -2225,7 +2225,7 @@ body #not_authenticated_financial ul.checked > li {
               transform: translateX(50%);
       position: absolute; }
       @media (max-width: 500px) {
-        .close-user-account .msg_main_modal .notice-msg {
+        .closure-content .close-user-account .msg_main_modal .notice-msg {
           width: 13rem; } }
 
 .account-closure-form {
