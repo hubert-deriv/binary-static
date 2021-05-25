@@ -2201,32 +2201,26 @@ body #not_authenticated_financial ul.checked > li {
       .why-us-content .awards-section .horizontal-margin {
         margin: 15px 15px 20px; } }
 
-.closure-content .close-user-account {
+.deactivated-account-content .close-user-account {
   height: 25vh; }
-  .closure-content .close-user-account .msg_main_modal {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 5; }
-    .closure-content .close-user-account .msg_main_modal .notice-msg {
-      width: 29rem;
-      border-radius: 4px;
-      background-color: #fff;
-      top: 25%;
-      height: auto;
-      padding: 1rem;
-      right: 50%;
-      -webkit-transform: translateX(50%);
-              transform: translateX(50%);
-      position: absolute; }
-      @media (max-width: 500px) {
-        .closure-content .close-user-account .msg_main_modal .notice-msg {
-          width: 13rem; } }
+  .deactivated-account-content .close-user-account .msg_main_modal .notice-msg {
+    background-color: transparent;
+    height: auto;
+    margin: auto; }
+    .deactivated-account-content .close-user-account .msg_main_modal .notice-msg img {
+      width: 4rem;
+      margin-bottom: 1rem; }
+    .deactivated-account-content .close-user-account .msg_main_modal .notice-msg p {
+      font-weight: 500; }
+    @media (max-width: 500px) {
+      .deactivated-account-content .close-user-account .msg_main_modal .notice-msg h1 {
+        font-size: 30px; } }
+    @media (max-width: 500px) {
+      .deactivated-account-content .close-user-account .msg_main_modal .notice-msg {
+        width: 90%; } }
+  @media (max-width: 500px) {
+    .deactivated-account-content .close-user-account {
+      margin-bottom: 5rem; } }
 
 .account-closure-form {
   text-align: left;

@@ -10583,13 +10583,11 @@ var Client = function () {
     var activateByClientType = function activateByClientType(section_id) {
         var topbar_class = getElementById('topbar').classList;
         var el_section = section_id ? getElementById(section_id) : document.body;
-        var account_session = sessionStorage.getItem('closingAccount');
-        sessionStorage.setItem('closingAccount', 0);
 
         var primary_bg_color_dark = 'primary-bg-color-dark';
         var secondary_bg_color = 'secondary-bg-color';
 
-        if (ClientBase.isLoggedIn() && parseInt(account_session) === 0) {
+        if (ClientBase.isLoggedIn()) {
             BinarySocket.wait('authorize', 'website_status', 'get_account_status').then(function () {
                 var client_logged_in = getElementById('client-logged-in');
                 client_logged_in.classList.add('gr-centered');
@@ -29889,7 +29887,6 @@ var AccountClosure = function () {
         $crypto_1 = void 0,
         $crypto_2 = void 0,
         $virtual = void 0,
-        $success_msg = void 0,
         $error_msg = void 0;
 
     var onLoad = function onLoad() {
@@ -29897,7 +29894,6 @@ var AccountClosure = function () {
         $closure_loading = $('#closure_loading');
         $submit_loading = $('#submit_loading');
         $closure_container = $('#closure_container');
-        $success_msg = $('#msg_main');
         $error_msg = $('#msg_form');
         $trading_limit = $('.trading_limit');
         $virtual = $('.virtual');
@@ -30267,23 +30263,13 @@ var AccountClosure = function () {
 
                             case 9:
                                 $btn_submit.attr('disabled', false);
-                                _context2.next = 19;
+                                _context2.next = 13;
                                 break;
 
                             case 12:
-                                sessionStorage.setItem('closingAccount', 1);
-                                Client.activateByClientType();
+                                Client.sendLogoutRequest(false, Url.urlFor('deactivated-account'));
 
-                                $submit_loading.setVisibility(0);
-                                $closure_container.setVisibility(0);
-                                $success_msg.setVisibility(1);
-                                $.scrollTo(0, 500);
-
-                                $('.close_main_modal').on('click', function () {
-                                    Client.sendLogoutRequest(false, Url.urlFor('home'));
-                                });
-
-                            case 19:
+                            case 13:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -37901,8 +37887,9 @@ var TradingResetPassword = function () {
             var $form_error = $('#form_error');
             getElementById('msg_reset_password').setVisibility(0);
             var err_msg = response.error.message;
-            $form_error.find('a').setVisibility(0);
+            $form_error.find('#form_error_retry').setVisibility(0);
             getElementById('form_error_msg').innerHTML = err_msg;
+            getElementById('form_error_cta').setVisibility(1);
             $form_error.setVisibility(1);
         } else {
             Dialog.alert({
