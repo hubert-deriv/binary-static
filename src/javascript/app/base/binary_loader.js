@@ -110,6 +110,7 @@ const BinaryLoader = (() => {
         no_mf            : () => localize('Sorry, but binary options trading is not available in your financial account.'),
         options_blocked  : () => localize('Sorry, but binary options trading is not available in your country.'),
         residence_blocked: () => localize('Sorry, this page is not available in your country of residence.'),
+        not_deactivated  : () => localize('Sorry, this page is not available, because your account has not been deactivated.'),
     };
 
     const loadHandler = (this_page) => {
@@ -149,6 +150,9 @@ const BinaryLoader = (() => {
                     displayMessage(error_messages.no_mf());
                 }
             });
+        }
+        if (this_page === 'deactivated-account' && Client.isLoggedIn()) {
+            displayMessage(error_messages.not_deactivated());
         }
 
         BinarySocket.wait('authorize').then(() => {

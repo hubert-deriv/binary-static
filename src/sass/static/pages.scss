@@ -1642,34 +1642,38 @@ body #not_authenticated_financial ul.checked > li {
     }
 }
 
-.deactivated-account-content .close-user-account {
-    height: 25vh;
+.deactivated-account-content {
+    text-align: center;
 
-    .msg_main_modal {
-        .notice-msg {
-            background-color: transparent;
-            height: auto;
-            margin: auto;
+    .close-user-account {
+        height: 25vh;
 
-            img {
-                width: 4rem;
-                margin-bottom: 1rem;
-            }
-            p {
-                font-weight: 500;
-            }
-            h1 {
+        .msg_main_modal {
+            .notice-msg {
+                background-color: transparent;
+                height: auto;
+                margin: auto;
+
+                img {
+                    width: 4rem;
+                    margin-bottom: 1rem;
+                }
+                p {
+                    font-weight: 500;
+                }
+                h1 {
+                    @media (max-width: 500px) {
+                        font-size: 30px;
+                    }
+                }
                 @media (max-width: 500px) {
-                    font-size: 30px;
+                    width: 90%;
                 }
             }
-            @media (max-width: 500px) {
-                width: 90%;
-            }
         }
-    }
-    @media (max-width: 500px) {
-        margin-bottom: 5rem;
+        @media (max-width: 500px) {
+            margin-bottom: 5rem;
+        }
     }
 }
 
