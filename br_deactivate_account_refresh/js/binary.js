@@ -9968,6 +9968,9 @@ var BinaryLoader = function () {
         not_authenticated: function not_authenticated() {
             return localize('This page is only available to logged out clients.');
         },
+        not_deactivated: function not_deactivated() {
+            return localize('This page is not available, you did not deactivate your account.');
+        },
         no_mf: function no_mf() {
             return localize('Sorry, but binary options trading is not available in your financial account.');
         },
@@ -9976,9 +9979,6 @@ var BinaryLoader = function () {
         },
         residence_blocked: function residence_blocked() {
             return localize('Sorry, this page is not available in your country of residence.');
-        },
-        not_deactivated: function not_deactivated() {
-            return localize('Sorry, this page is not available, because your account has not been deactivated.');
         }
     };
 
