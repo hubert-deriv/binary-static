@@ -57,8 +57,8 @@ const VirtualAccOpening = (() => {
     };
 
     const handleWebsiteStatus = (website_status = {}, $residence) => {
-        const consent_checkbox = $('#consent_checkbox');
-        const email_consent = $('#email_consent');
+        const email_consent_container = $('#consent_checkbox');
+        const consent_checkbox = $('#email_consent');
         if (!website_status || Utility.isEmptyObject(website_status)) return;
         const clients_country = website_status.clients_country;
 
@@ -77,20 +77,20 @@ const VirtualAccOpening = (() => {
             
         const residence_dropdown = $('#residence');
         if (isEuCountrySelected(residence_dropdown.val())) {
-            email_consent.removeClass('hidden-consent-checkbox');
-            consent_checkbox.removeClass('email-consent-container');
+            consent_checkbox.removeClass('hidden-consent-checkbox');
+            email_consent_container.removeClass('email-consent-container');
         } else {
-            email_consent.addClass('hidden-consent-checkbox');
+            consent_checkbox.addClass('hidden-consent-checkbox');
         }
         residence_dropdown.on('change', () => {
             const updated_selected_value = $('#residence').val();
             const eu_country = isEuCountrySelected(updated_selected_value);
             if (eu_country) {
-                email_consent.removeClass('hidden-consent-checkbox');
-                consent_checkbox.removeClass('email-consent-container');
+                consent_checkbox.removeClass('hidden-consent-checkbox');
+                email_consent_container.removeClass('email-consent-container');
             } else {
-                email_consent.addClass('hidden-consent-checkbox');
-                consent_checkbox.addClass('email-consent-container');
+                consent_checkbox.addClass('hidden-consent-checkbox');
+                email_consent_container.addClass('email-consent-container');
             }
         });
     };
