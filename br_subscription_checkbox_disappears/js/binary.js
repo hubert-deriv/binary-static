@@ -36551,8 +36551,8 @@ var VirtualAccOpening = function () {
         var website_status = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         var $residence = arguments[1];
 
-        var consent_checkbox = $('#consent_checkbox');
-        var email_consent = $('#email_consent');
+        var email_consent_container = $('#consent_checkbox');
+        var consent_checkbox = $('#email_consent');
         if (!website_status || Utility.isEmptyObject(website_status)) return;
         var clients_country = website_status.clients_country;
 
@@ -36569,20 +36569,20 @@ var VirtualAccOpening = function () {
 
         var residence_dropdown = $('#residence');
         if (isEuCountrySelected(residence_dropdown.val())) {
-            email_consent.removeClass('hidden-consent-checkbox');
-            consent_checkbox.removeClass('email-consent-container');
+            consent_checkbox.removeClass('hidden-consent-checkbox');
+            email_consent_container.removeClass('email-consent-container');
         } else {
-            email_consent.addClass('hidden-consent-checkbox');
+            consent_checkbox.addClass('hidden-consent-checkbox');
         }
         residence_dropdown.on('change', function () {
             var updated_selected_value = $('#residence').val();
             var eu_country = isEuCountrySelected(updated_selected_value);
             if (eu_country) {
-                email_consent.removeClass('hidden-consent-checkbox');
-                consent_checkbox.removeClass('email-consent-container');
+                consent_checkbox.removeClass('hidden-consent-checkbox');
+                email_consent_container.removeClass('email-consent-container');
             } else {
-                email_consent.addClass('hidden-consent-checkbox');
-                consent_checkbox.addClass('email-consent-container');
+                consent_checkbox.addClass('hidden-consent-checkbox');
+                email_consent_container.addClass('email-consent-container');
             }
         });
     };
