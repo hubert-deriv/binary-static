@@ -14186,7 +14186,7 @@ var FormManager = function () {
 
         fields.forEach(function (field) {
             if (!field.exclude_request) {
-                if (field.$.attr('class') === 'hide-product-checkbox' || field.$.is(':visible') || field.value || field.$.attr('data-force')) {
+                if (field.$.attr('class') === 'hidden-consent-checkbox' || field.$.is(':visible') || field.value || field.$.attr('data-force')) {
                     val = field.$.val();
                     key = field.request_field || field.selector;
 
@@ -14197,8 +14197,8 @@ var FormManager = function () {
                         value = field.$.attr('data-value');
                     } else if (/lbl_/.test(key)) {
                         value = field.value || field.$.text();
-                    } else if (field.$.attr('class') === 'hide-product-checkbox') {
-                        value = field.$.attr('class') === 'hide-product-checkbox' ? 1 : 0;
+                    } else if (field.$.attr('class') === 'hidden-consent-checkbox') {
+                        value = field.$.attr('class') === 'hidden-consent-checkbox' ? 1 : 0;
                     } else if (field.$.is(':checkbox')) {
                         value = field.$.is(':checked') ? 1 : 0;
                     } else if (Array.isArray(val)) {
@@ -36550,8 +36550,8 @@ var VirtualAccOpening = function () {
         var website_status = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         var $residence = arguments[1];
 
-        var consent_checkbox = document.getElementById('consent_checkbox');
-        var email_consent = document.getElementById('email_consent');
+        var email_consent_container = $('#consent_checkbox');
+        var consent_checkbox = $('#email_consent');
         if (!website_status || Utility.isEmptyObject(website_status)) return;
         var clients_country = website_status.clients_country;
 
@@ -36566,22 +36566,24 @@ var VirtualAccOpening = function () {
             }
         }).setVisibility(1);
 
-        var residence_dropdown = document.getElementById('residence');
-        if (!isEuCountrySelected(residence_dropdown.value)) {
-            email_consent.classList.add('hide-product-checkbox');
-            consent_checkbox.classList.add('hide-product-checkbox');
+        var residence_dropdown = $('#residence');
+        if (isEuCountrySelected(residence_dropdown.val())) {
+            consent_checkbox.removeClass('hidden-consent-checkbox');
+            email_consent_container.removeClass('email-consent-container');
+        } else {
+            consent_checkbox.addClass('hidden-consent-checkbox');
         }
-        residence_dropdown.onchange = function () {
-            var updated_selected_value = document.getElementById('residence').value;
+        residence_dropdown.on('change', function () {
+            var updated_selected_value = $('#residence').val();
             var eu_country = isEuCountrySelected(updated_selected_value);
             if (eu_country) {
-                email_consent.classList.remove('hide-product-checkbox');
-                consent_checkbox.classList.remove('hide-product-checkbox');
+                consent_checkbox.removeClass('hidden-consent-checkbox');
+                email_consent_container.removeClass('email-consent-container');
             } else {
-                email_consent.classList.add('hide-product-checkbox');
-                consent_checkbox.classList.add('hide-product-checkbox');
+                consent_checkbox.addClass('hidden-consent-checkbox');
+                email_consent_container.addClass('email-consent-container');
             }
-        };
+        });
     };
 
     var bindValidation = function bindValidation() {
