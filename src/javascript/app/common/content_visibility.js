@@ -192,19 +192,8 @@ const ContentVisibility = (() => {
         updateTabDisplay();
     };
 
-    // if text is hidden, we need to append it to body to be able to get its width
-    const getTextWidth = (text) => {
-        const $el = $('<span />', { text });
-        $el.prependTo('body');
-        const el_width = $el.width();
-        $el.remove();
-        return el_width;
-    };
-
     const centerSelect = ($el) => {
-        const option_width = getTextWidth($el.children(':selected').html());
-        const empty_space = '280' - option_width; // in mobile all select drop-downs are hardcoded to be at 280px in css
-        $el.css('text-indent', (empty_space / 2) - 7); // 7px is for the drop-down arrow
+        $el.css('text-align-last', 'center');
     };
 
     const centerAlignSelect = (should_init) => {

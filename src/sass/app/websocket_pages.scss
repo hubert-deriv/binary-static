@@ -90,6 +90,16 @@
     @media screen and (max-width: 480px) {
         div.select {
             width: calc(100% - 3rem);
+            text-align-last: center;
+        }
+        #citizen, div.select + span {
+            width: calc(100% - 3rem);
+        }
+        .select2-container {
+            width: calc(100% - 3rem) !important;
+        }
+        #source_of_wealth {
+            min-width: 0;
         }
     }
 }
