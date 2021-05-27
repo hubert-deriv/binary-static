@@ -194,6 +194,7 @@ const ContentVisibility = (() => {
 
     const centerSelect = ($el) => {
         $el.css('text-align-last', 'center');
+        $el.css('text-align', 'justify');
     };
 
     const centerAlignSelect = (should_init) => {

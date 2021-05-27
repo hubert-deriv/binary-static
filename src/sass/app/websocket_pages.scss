@@ -96,6 +96,7 @@
         div.select {
             width: calc(100% - 3rem);
             text-align-last: center;
+            text-align: justify;
         }
         #citizen, div.select + span {
             width: calc(100% - 3rem);
