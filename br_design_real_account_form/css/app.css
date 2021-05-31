@@ -2069,16 +2069,15 @@ tbody#instruments > tr > td {
 
 @media screen and (max-width: 480px) {
   #financial-form div.select {
-    width: calc(100% - 3rem);
-    -moz-text-align-last: center;
-         text-align-last: center;
-    text-align: justify; }
+    width: calc(100% - 3rem); }
   #financial-form #citizen, #financial-form div.select + span {
     width: calc(100% - 3rem); }
   #financial-form .select2-container {
     width: calc(100% - 3rem) !important; }
   #financial-form #source_of_wealth {
-    min-width: 0; } }
+    min-width: 0; }
+  #financial-form #secret_answer {
+    text-align: center; } }
 
 #frm_account_transfer div.select select.select-hidden {
   min-width: 200px; }
