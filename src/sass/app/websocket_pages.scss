@@ -95,8 +95,6 @@
     @media screen and (max-width: 480px) {
         div.select {
             width: calc(100% - 3rem);
-            text-align-last: center;
-            text-align: justify;
         }
         #citizen, div.select + span {
             width: calc(100% - 3rem);
@@ -106,6 +104,9 @@
         }
         #source_of_wealth {
             min-width: 0;
+        }
+        #secret_answer {
+            text-align: center;
         }
     }
 }

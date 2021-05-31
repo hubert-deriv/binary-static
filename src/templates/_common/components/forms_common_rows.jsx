@@ -158,7 +158,7 @@ export const Phone = ({ hint, row_class, row_id }) => (
 );
 
 export const SecretQuestion = () => (
-    <FormRow type='select' id='secret_question' label={it.L('Secret question')}>
+    <FormRow type='select' id='secret_question' className='center-select-m' label={it.L('Secret question')}>
         <option value='Favourite dish'>{it.L('Favourite dish')}</option>
         <option value="Mother's maiden name">{it.L('Mother\'s maiden name')}</option>
         <option value='Name of your pet'>{it.L('Name of your pet')}</option>

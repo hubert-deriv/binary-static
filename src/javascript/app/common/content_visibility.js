@@ -192,16 +192,34 @@ const ContentVisibility = (() => {
         updateTabDisplay();
     };
 
+    // if text is hidden, we need to append it to body to be able to get its width
+    const getTextWidth = (text) => {
+        const $el = $('<span />', { text });
+        $el.prependTo('body');
+        const el_width = $el.width();
+        $el.remove();
+        return el_width;
+    };
+
     const centerSelect = ($el) => {
-        $el.css('text-align-last', 'center');
-        $el.css('text-align', 'justify');
+        const option_width = getTextWidth($el.children(':selected').text());
+        const center_option_text = option_width / 2;
+        $el.css('text-indent', `calc(50% - ${center_option_text}px)`);
     };
 
     const centerAlignSelect = (should_init) => {
         $(window).off('resize', centerAlignSelect);
+        $('#financial-form #trading_experience_form select, #financial-form #financial_info_form select').addClass('center-select-m');
         $center_select_m = ((typeof should_init === 'boolean' && should_init) || !$center_select_m) ? $('.center-select-m') : $center_select_m;
 
         if ($(window).width() <= 480) {
+            const financial_form_selects = $('#financial-form select');
+            financial_form_selects.get().forEach((element) => {
+                const option_width = getTextWidth($(element).children(':selected').text());
+                const center_option_text = option_width / 2;
+                $(element).css('text-indent', `calc(50% - ${center_option_text}px)`);
+            });
+
             $center_select_m.on('change', function() {
                 centerSelect($(this));
             });
