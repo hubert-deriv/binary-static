@@ -13740,7 +13740,6 @@ var eu_country_rule = 'eucountry';
 var options_blocked_rule = 'optionsblocked';
 
 var ContentVisibility = function () {
-    var $center_select_m = void 0;
 
     var init = function init() {
         var arr_mt5fin_shortcodes = void 0;
@@ -13894,47 +13893,7 @@ var ContentVisibility = function () {
         updateTabDisplay();
     };
 
-    // if text is hidden, we need to append it to body to be able to get its width
-    var getTextWidth = function getTextWidth(text) {
-        var $el = $('<span />', { text: text });
-        $el.prependTo('body');
-        var el_width = $el.width();
-        $el.remove();
-        return el_width;
-    };
-
-    var centerSelect = function centerSelect($el) {
-        var option_width = getTextWidth($el.children(':selected').text());
-        var center_option_text = option_width / 2;
-        $el.css('text-indent', 'calc(50% - ' + center_option_text + 'px)');
-    };
-
-    var centerAlignSelect = function centerAlignSelect(should_init) {
-        $(window).off('resize', centerAlignSelect);
-        $('#financial-form #trading_experience_form select, #financial-form #financial_info_form select').addClass('center-select-m');
-        $center_select_m = typeof should_init === 'boolean' && should_init || !$center_select_m ? $('.center-select-m') : $center_select_m;
-
-        if ($(window).width() <= 480) {
-            var financial_form_selects = $('#financial-form select');
-            financial_form_selects.get().forEach(function (element) {
-                var option_width = getTextWidth($(element).children(':selected').text());
-                var center_option_text = option_width / 2;
-                $(element).css('text-indent', 'calc(50% - ' + center_option_text + 'px)');
-            });
-
-            $center_select_m.on('change', function () {
-                centerSelect($(this));
-            });
-        } else {
-            $center_select_m.each(function () {
-                $(this).css('text-indent', 0);
-            });
-            $(window).resize(centerAlignSelect);
-        }
-    };
-
     return {
-        centerAlignSelect: centerAlignSelect,
         init: init,
         __test__: {
             parseAttributeString: parseAttributeString,
