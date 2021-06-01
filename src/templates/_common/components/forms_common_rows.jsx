@@ -72,7 +72,9 @@ export const Residence = ({ className, row_class, row_id }) => (
         className={className || ''}
         label={it.L('Country of residence')}
     >
-        <label id='lbl_residence' />
+        <div id='residence_container'>
+            <label id='lbl_residence' />
+        </div>
     </FormRow>
 );
 
