@@ -2301,8 +2301,8 @@ tbody#instruments > tr > td {
               justify-content: center; } }
 
 .realws-content #lbl_residence {
-  text-align: left;
-  margin-left: 0.5rem; }
+  margin-left: 0.5rem;
+  text-align: left; }
 
 .realws-content #date_of_birth {
   margin: 0;
@@ -2320,23 +2320,23 @@ tbody#instruments > tr > td {
   .realws-content select, .realws-content div.select {
     width: 100%;
     height: 2rem; }
-  .realws-content .place_of_birth_container .gr-8 {
-    text-align: left; }
+  .realws-content #lbl_residence {
+    text-align: center;
+    margin-left: -0.5rem; }
   .realws-content div.select:after {
     top: 12px; }
   .realws-content input:not([type=checkbox]), .realws-content #address_form #address_postcode {
     width: calc(100% - 1.2rem);
-    height: 1.5rem;
-    text-align: left; }
+    height: 1.5rem; }
   .realws-content #source_of_wealth {
     min-width: 0; }
   .realws-content .select2-container {
     width: 100% !important; }
-  .realws-content .select2-selection {
-    text-align: left; }
   .realws-content div.select + span {
     width: 100%;
-    height: 1.9rem; } }
+    height: 1.9rem; }
+  .realws-content #secret_answer {
+    text-align: center; } }
 
 #paymentagent_withdrawal .wrapper-row-agent label {
   padding-bottom: 10px; }
