@@ -1,16 +1,18 @@
-const urlFor = require('../../_common/url').urlFor;
-const Client = require('../../app/base/client');
+const Url        = require('../../../javascript/_common/url.js');
+const Client     = require('../../app/base/client');
+const BinaryPjax = require('../../app/base/binary_pjax');
 
 const DeactivatedAccount = (() => {
     const onLoad = () => {
-        const redirect_home = urlFor('home');
-        const redirect_trading = urlFor('trading');
+        const redirect_home = Url.urlFor('home');
+        const redirect_trading = Url.urlFor('trading');
         setTimeout(() => {
             if (Client.isLoggedIn()) {
-                window.location.href = redirect_trading;
+                BinaryPjax.load(redirect_trading);
             } else {
-                window.location.href = redirect_home;
+                BinaryPjax.load(redirect_home);
             }
+            
         }, 5000);
     };
 
