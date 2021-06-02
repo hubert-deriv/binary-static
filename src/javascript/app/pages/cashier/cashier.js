@@ -93,6 +93,7 @@ const Cashier = (() => {
         const has_upgrade         = upgrade_info.can_upgrade || upgrade_info.can_open_multi
                                     || can_change;
         const account_action_text = has_upgrade ? `<br />${localize('[_1]Manage your accounts[_2]', [`<a href=${Url.urlFor('user/accounts')}>`, '</a>'])}` : '';
+        const clients_country     = Client.get('residence') || State.getResponse('website_status.clients_country');
 
         const missingCriteria = (has_mt5, has_transaction) => {
             const existing_mt5_msg          = localize('You can no longer change the currency because you\'ve created an MT5 account.') + account_action_text;
@@ -113,7 +114,7 @@ const Cashier = (() => {
         const currency_hint = Currency.isCryptocurrency(currency)
             ? localize('Don\'t want to trade in [_1]? You can open another cryptocurrency account.', `${Currency.getCurrencyDisplayCode(currency)}`) + account_action_text
             : has_no_mt5 && has_no_transaction
-                ? localize('You can [_1]set a new currency[_2] before you deposit for the first time or create an MT5 account.', can_change ? [`<a href=${Url.urlFor('user/accounts')}>`, '</a>'] : ['', ''])
+                ? localize('You can [_1]set a new currency[_2] before you deposit for the first [_3].', can_change ? [`<a href=${Url.urlFor('user/accounts')}>`, '</a>', `${clients_country === 'im' ? 'time' : 'time or create an MT5 account'}`] : ['', '', ''])
                 : missingCriteria(!has_no_mt5, !has_no_transaction);
 
         elementInnerHtml(el_current_currency, currency_message);
