@@ -105,16 +105,9 @@ const BinaryLoader = (() => {
         only_virtual     : () => localize('This feature is available to virtual accounts only.'),
         only_real        : () => localize('This feature is not relevant to virtual-money accounts.'),
         not_authenticated: () => localize('This page is only available to logged out clients.'),
-<<<<<<< HEAD
-        not_deactivated  : () => localize('This page is not available, you did not deactivate your account.'),
-        no_mf            : () => localize('Sorry, but binary options trading is not available in your financial account.'),
-        options_blocked  : () => localize('Sorry, but binary options trading is not available in your country.'),
-        residence_blocked: () => localize('Sorry, this page is not available in your country of residence.'),
-=======
         no_mf            : () => localize('Binary options trading is not available in your financial account.'),
         options_blocked  : () => localize('Binary options trading is not available in your country.'),
         residence_blocked: () => localize('This page is not available in your country of residence.'),
->>>>>>> 14b53ab4636bd629a92ebb70632a144a810d0a3f
     };
 
     const loadHandler = (this_page) => {
