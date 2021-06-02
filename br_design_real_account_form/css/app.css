@@ -2071,9 +2071,6 @@ tbody#instruments > tr > td {
   text-align: left;
   margin-left: 0.5rem; }
 
-#financial-form .place_of_birth_container .gr-8 span {
-  margin-left: 8px; }
-
 #financial-form #date_of_birth {
   margin: 0;
   text-indent: 0; }
@@ -2310,9 +2307,6 @@ tbody#instruments > tr > td {
 .realws-content #date_of_birth {
   margin: 0;
   text-indent: 0; }
-
-.realws-content .place_of_birth_container .gr-8 span {
-  margin-left: 8px; }
 
 .realws-content input:not([type=checkbox]), .realws-content .select-dropdown {
   width: 260px; }
