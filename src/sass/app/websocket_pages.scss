@@ -96,6 +96,9 @@
         text-align: left;
         margin-left: 0.5rem;
     }
+    .place_of_birth_container .gr-8 span {
+        margin-left: 8px;
+    }
     #date_of_birth {
         margin: 0;
         text-indent: 0;
@@ -106,7 +109,6 @@
     #citizen, #address_postcode {
         box-sizing: unset;
         -webkit-box-sizing: unset;
-
     }
 
     @media screen and (max-width: 480px) {
@@ -114,10 +116,13 @@
             width: 100%;
             height: 2rem;
         }
+        .place_of_birth_container .gr-8 {
+            text-align: left;
+        }
         div.select:after {
             top: 12px;
         }
-        input:not([type=checkbox]) {
+        input:not([type=checkbox]), #citizen {
             width: calc(100% - 1.2rem);
             height: 1.5rem;
             text-align: left;
@@ -131,7 +136,7 @@
         .select2-selection {
             text-align: left;
         }
-        #citizen, div.select + span {
+        div.select + span {
             width: 100%;
             height: 1.9rem;
         }
@@ -374,8 +379,55 @@
 }
 
 .realws-content {
-    div.select-dropdown {
-        width: 100%;
+    #lbl_residence {
+        text-align: left;
+        margin-left: 0.5rem;
+    }
+    #date_of_birth {
+        margin: 0;
+        text-indent: 0;
+    }
+    .place_of_birth_container .gr-8 span {
+        margin-left: 8px;
+    }
+    input:not([type=checkbox]), .select-dropdown {
+        width: 260px;
+    }
+    #address_form #address_postcode {
+        box-sizing: unset;
+        -webkit-box-sizing: unset;
+        width: 260px;
+    }
+
+    @media screen and (max-width: 480px) {
+        select, div.select {
+            width: 100%;
+            height: 2rem;
+        }
+        .place_of_birth_container .gr-8 {
+            text-align: left;
+        }
+        div.select:after {
+            top: 12px;
+        }
+        input:not([type=checkbox]), #address_form #address_postcode {
+            width: calc(100% - 1.2rem);
+            height: 1.5rem;
+            text-align: left;
+        }
+        #source_of_wealth {
+            min-width: 0;
+        }
+        .select2-container {
+            width: 100% !important;
+        }
+        .select2-selection {
+            text-align: left;
+        }
+        div.select + span {
+            width: 100%;
+            height: 1.9rem;
+        }
     }
 }
 
