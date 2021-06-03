@@ -323,7 +323,7 @@ const Metatrader = () => (
                                         </button>
                                     </div>
                                     <div id='view_3-buttons_new_user' className='gr-padding-10 center-text'>
-                                        <button className='button button-secondary btn-back' id='new_user_cancel_button'>
+                                        <button className='button button-secondary btn-cancel' id='new_user_cancel_button'>
                                             {it.L('Cancel')}
                                         </button>
                                         <a className='button button-primary invisible' id='has_mt5_new_user_btn_submit_new_account' href={it.url_for('user/security/change_passwordws')}>
