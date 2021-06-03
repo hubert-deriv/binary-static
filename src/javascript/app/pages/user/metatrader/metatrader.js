@@ -238,7 +238,7 @@ const MetaTrader = (() => {
                 req[field_obj.request_field] = MetaTraderUI.$form().find(field_obj.id).val();
             }
         });
-
+//fixing circleci
         const deprecated_mt5_requests = ['password_change', 'password_reset'];
         if (!['verify_password_reset', ...deprecated_mt5_requests].includes(action)) {
             // set main command
