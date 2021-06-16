@@ -34,7 +34,6 @@ const Home = (() => {
                 fnc_additional_check: checkCountry,
             });
         });
-        noMultipleErrors();
     };
 
     const checkCountry = (req) => {
@@ -67,17 +66,6 @@ const Home = (() => {
                 $('.signup-box div').replaceWith($('<p/>', { text: localize('Thank you for signing up! Please check your email to complete the registration process.'), class: 'gr-10 gr-centered center-text' }));
                 $('#social-signup').setVisibility(0);
             }
-        });
-    };
-
-    const noMultipleErrors = () => {
-        $('#email').on('input', () => {
-            setTimeout(() => {
-                const other_error = $('.error-msg').hasClass('invisible');
-                if (!other_error) {
-                    $('#signup_error').setVisibility(0);
-                }
-            });
         });
     };
 
