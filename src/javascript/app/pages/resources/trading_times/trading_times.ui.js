@@ -139,6 +139,7 @@ const TradingTimesUI = (() => {
                 // changing market data to fit as a class on the table
                 const submarket_class = submarkets[s].name.replace(/\s|\//g, '-').toLowerCase();
 
+                // adding the submarket name and adding a class to the element
                 $submarket_table.find('thead').prepend(createSubmarketHeader(submarkets[s].name)).addClass(submarket_class)
                     .find('th.opens, th.closes').addClass('nowrap');
 
