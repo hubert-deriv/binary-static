@@ -18,9 +18,11 @@ const TradingTimesUI = (() => {
         $empty_trading_times,
         columns,
         active_symbols,
+        gaming_account,
         trading_times;
 
     const onLoad = () => {
+        gaming_account       = ClientBase.getAccountType() === 'gaming';
         $date                = $('#trading-date');
         $container           = $('#trading-times');
         $date_container      = $('#trading-date-container');
@@ -127,7 +129,6 @@ const TradingTimesUI = (() => {
 
     const createMarketTables = (market) => {
         const $market_tables = $('<div/>');
-        const gaming_account = ClientBase.getAccountType() === 'gaming';
         // submarkets of this market
         const submarkets = market.submarkets;
         let should_populate;
