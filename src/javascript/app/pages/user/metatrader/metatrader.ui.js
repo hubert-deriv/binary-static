@@ -338,8 +338,8 @@ const MetaTraderUI = (() => {
         $container.find('#account_desc').html($el_to_clone.clone());
     };
 
-    const setCurrentAccount = (acc_type) => {
-        if (Client.get('mt5_account') && Client.get('mt5_account') !== acc_type) return;
+    const setCurrentAccount = async (acc_type) => {
+        if (await Client.get('mt5_account') && Client.get('mt5_account') !== acc_type) return;
 
         if (current_action_ui !== 'new_account') {
             displayAccountDescription(acc_type);
