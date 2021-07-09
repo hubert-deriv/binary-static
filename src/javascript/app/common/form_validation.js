@@ -159,13 +159,16 @@ const Validation = (() => {
     // ------------------------------
     // ----- Validation Methods -----
     // ------------------------------
+
+    // The unicodes in the validEmail check, only select latin alphabet characters.
+    // This allows filtering other invalid unicode alphabet characters.
+    const validEmail        = value => /^(([a-zA-Z0-9\u0080-\u00ff\u0100-\u017f\u0180-\u024f][^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
     const validRequired     = (value, options, field) => {
         if (value.length) return true;
         // else
         ValidatorsMap.get().req.message = field.type === 'checkbox' ? localize('Please select the checkbox.') : localize('This field is required.');
         return false;
     };
-    const validEmail        = value => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
     const validPassword     = (value, options, field) => {
         if (/^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])[ -~]*$/.test(value)) {
             Password.checkPassword(field.selector, true);
