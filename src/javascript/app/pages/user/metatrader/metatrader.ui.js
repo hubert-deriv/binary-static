@@ -339,10 +339,10 @@ const MetaTraderUI = (() => {
     };
 
     const setCurrentAccount = async (account_type) => {
-        let acc_type = account_type;
-        const current_account = Client.get('mt5_account');
+        let acc_type = await account_type;
+        const current_account = await Client.get('mt5_account');
 
-        if (await current_account && current_account !== acc_type) return;
+        if (current_account && current_account !== acc_type) return;
 
         if (current_account === 'real_unknown') {
             const default_to_other = Object.keys(accounts_info).find(account => getAccountsInfo(account).info);
