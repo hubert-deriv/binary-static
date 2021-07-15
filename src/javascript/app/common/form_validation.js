@@ -160,7 +160,8 @@ const Validation = (() => {
     // ----- Validation Methods -----
     // ------------------------------
 
-    const validEmail        = value => /^(([a-zA-Z0-9][^!@£$%^&*=/?§±~<>(){}[\]\\.,;:\s@"'`]+(\.[^!@£$%^&*=/?§±~<>(){}[\]\\.,;:\s@"'`]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+    const validEmail        = value => /^(([a-zA-Z0-9][^!@£$%^&*=/?§±~<>(){}[\]\\.,;:\s"'`]+(\.[^!@£$%^&*=/?§±~<>(){}[\]\\.,;:\s"'`]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+
     const validRequired     = (value, options, field) => {
         if (value.length) return true;
         // else
@@ -363,15 +364,15 @@ const Validation = (() => {
         if (!all_is_ok) {
             showError(field, message);
         } else {
-            clearError(field);
+            clearError(field, message);
         }
 
         return all_is_ok;
     };
 
-    const clearError = (field) => {
+    const clearError = (field, localized_message) => {
         if (field.$error && field.$error.length) {
-            field.$error.setVisibility(0);
+            field.$error.html(localized_message).setVisibility(0);
             if (field.$submit_btn_error && field.$submit_btn_error.length) {
                 field.$submit_btn_error.setVisibility(0);
             }
