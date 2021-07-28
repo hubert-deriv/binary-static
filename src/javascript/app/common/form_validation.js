@@ -315,7 +315,6 @@ const Validation = (() => {
         }
 
         let all_is_ok = true;
-        let message   = '';
         const field_type = field.$.attr('type');
 
         field.validations.some((valid) => {
@@ -347,13 +346,17 @@ const Validation = (() => {
             }
 
             if (!field.is_ok) {
-                message = options.message || ValidatorsMap.get(type).message;
+                let message_template;
+                field.$error.text(options.message || ValidatorsMap.get(type).message);
                 if (type === 'length') {
-                    message = template(message, [options.min === options.max ? options.min : `${options.min}-${options.max}`]);
+                    message_template = template('', [options.min === options.max ? options.min : `${options.min}-${options.max}`]);
+                    field.$error.text(message_template);
                 } else if (type === 'min') {
-                    message = template(message, [options.min]);
+                    message_template = template('', [options.min]);
+                    field.$error.text(message_template);
                 } else if (type === 'not_equal') {
-                    message = template(message, [options.name1, options.name2]);
+                    message_template = template('', [options.name1, options.name2]);
+                    field.$error.text(message_template);
                 }
                 all_is_ok = false;
                 return true; // break on the first error found
@@ -362,28 +365,26 @@ const Validation = (() => {
         });
 
         if (!all_is_ok) {
-            showError(field, message);
+            showError(field);
         } else {
-            clearError(field, message);
+            clearError(field);
         }
 
         return all_is_ok;
     };
 
-    const clearError = (field, localized_message) => {
+    const clearError = (field) => {
         if (field.$error && field.$error.length) {
-            field.$error.html(localized_message).setVisibility(0);
+            field.$error.setVisibility(0);
             if (field.$submit_btn_error && field.$submit_btn_error.length) {
                 field.$submit_btn_error.setVisibility(0);
             }
         }
     };
 
-    const showError = (field, localized_message) => {
-        if (field.$error.html() === localized_message) return;
-        clearError(field);
+    const showError = (field) => {
         Password.removeCheck(field.selector);
-        field.$error.html(localized_message).setVisibility(1);
+        field.$error.setVisibility(1);
     };
 
     const validate = (form_selector) => {
