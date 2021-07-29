@@ -316,6 +316,7 @@ const Validation = (() => {
 
         let all_is_ok = true;
         const field_type = field.$.attr('type');
+        let message_template;
 
         field.validations.some((valid) => {
             if (!valid) return false; // check next validation
@@ -346,7 +347,7 @@ const Validation = (() => {
             }
 
             if (!field.is_ok) {
-                let message_template = options.message || ValidatorsMap.get(type).message;
+                message_template = options.message || ValidatorsMap.get(type).message;
                 if (type === 'length') {
                     message_template = template('', [options.min === options.max ? options.min : `${options.min}-${options.max}`]);
                 } else if (type === 'min') {
@@ -355,14 +356,13 @@ const Validation = (() => {
                     message_template = template('', [options.name1, options.name2]);
                 }
                 all_is_ok = false;
-                field.$error.text(message_template);
                 return true; // break on the first error found
             }
             return false; // check next validation
         });
 
         if (!all_is_ok) {
-            showError(field);
+            showError(field, message_template);
         } else {
             clearError(field);
         }
@@ -379,8 +379,9 @@ const Validation = (() => {
         }
     };
 
-    const showError = (field) => {
+    const showError = (field, message) => {
         Password.removeCheck(field.selector);
+        field.$error.text(message);
         field.$error.setVisibility(1);
     };
 
