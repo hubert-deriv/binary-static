@@ -316,7 +316,7 @@ const Validation = (() => {
 
         let all_is_ok = true;
         const field_type = field.$.attr('type');
-        let message_template;
+        let message_template = '';
 
         field.validations.some((valid) => {
             if (!valid) return false; // check next validation
@@ -349,11 +349,11 @@ const Validation = (() => {
             if (!field.is_ok) {
                 message_template = options.message || ValidatorsMap.get(type).message;
                 if (type === 'length') {
-                    message_template = template('', [options.min === options.max ? options.min : `${options.min}-${options.max}`]);
+                    message_template = template(message_template, [options.min === options.max ? options.min : `${options.min}-${options.max}`]);
                 } else if (type === 'min') {
-                    message_template = template('', [options.min]);
+                    message_template = template(message_template, [options.min]);
                 } else if (type === 'not_equal') {
-                    message_template = template('', [options.name1, options.name2]);
+                    message_template = template(message_template, [options.name1, options.name2]);
                 }
                 all_is_ok = false;
                 return true; // break on the first error found
