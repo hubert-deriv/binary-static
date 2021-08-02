@@ -160,7 +160,7 @@ const Validation = (() => {
     // ----- Validation Methods -----
     // ------------------------------
 
-    const validEmail        = value => /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9]){1,}?$/.test(value);
+    const validEmail        = value => /^[a-zA-Z0-9]+(?:(?!.*(.)\1+)[a-zA-Z0-9.+_-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9]){1,}?$/.test(value);
 
     const validRequired     = (value, options, field) => {
         if (value.length) return true;
