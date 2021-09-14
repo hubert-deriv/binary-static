@@ -573,8 +573,7 @@ const MetaTraderUI = (() => {
             txt_amount_deposit_element.on('input', () => {
                 const balance = Client.get('balance');
                 const insufficient_funds_error = $form.find('#insufficient_funds');
-                const txt_amount_deposit_value = txt_amount_deposit_element.val();
-                const is_balance_more_than_entered = balance >= txt_amount_deposit_value;
+                const is_balance_more_than_entered = balance >= txt_amount_deposit_element.val();
 
                 if (is_balance_more_than_entered) {
                     return insufficient_funds_error.setVisibility(0);
