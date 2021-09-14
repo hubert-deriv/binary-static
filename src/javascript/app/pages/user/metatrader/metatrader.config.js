@@ -439,8 +439,6 @@ const MetaTraderConfig = (() => {
                 selector   : fields.deposit.txt_amount.id,
                 validations: [
                     ['req', { hide_asterisk: true }],
-                    // check if entered amount is less than the available balance
-                    // e.g. transfer amount is 10 but client balance is 5
                     // check if balance is less than the minimum limit for transfer
                     // e.g. client balance could be 0.45 but min limit could be 1
                     ['custom', {
