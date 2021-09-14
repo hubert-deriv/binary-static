@@ -341,7 +341,7 @@
                     color: $COLOR_GRAY_SHADE;
                 }
                 #insufficient_funds {
-                    a {
+                    .insufficient-funds-error-link {
                         color: $COLOR_RED;
                     }
                     text-align: left;
