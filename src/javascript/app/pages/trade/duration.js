@@ -599,11 +599,11 @@ const Durations = (() => {
         duration_stock_indices_element.setVisibility(0);
 
         if (current_market === 'Stock Indices' && duration_unit_value === 'h') {
-            const is_one_hour = parseInt(duration_amount) === parseInt(duration_min_element.innerText);
+            const value_is_one_hour = parseInt(duration_amount) === parseInt(duration_min_element.innerText);
             duration_stock_indices_element.setVisibility(1);
             duration_wrapper_element.setVisibility(0);
 
-            if (!is_one_hour) {
+            if (!value_is_one_hour) {
                 duration_stock_indices_element.classList.add('error-msg');
             } else {
                 duration_stock_indices_element.classList.remove('error-msg');
