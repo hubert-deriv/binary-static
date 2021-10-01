@@ -588,8 +588,6 @@ const Durations = (() => {
         const current_market                 = CommonFunctions.querySelector('.market_current .market').innerText;
         const duration_stock_indices_element = CommonFunctions.getElementById('duration_stock_indices');
 
-        console.log(testest);
-
         if (!CommonFunctions.isVisible(duration_amount_element)) {
             duration_wrapper_element.setVisibility(0);
             return;
