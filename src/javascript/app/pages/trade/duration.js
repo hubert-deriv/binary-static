@@ -587,10 +587,26 @@ const Durations = (() => {
         const duration_wrapper_element       = CommonFunctions.getElementById('duration_wrapper');
         const current_market                 = CommonFunctions.querySelector('.market_current .market').innerText;
         const duration_stock_indices_element = CommonFunctions.getElementById('duration_stock_indices');
+        const contract_errors                = CommonFunctions.getElementsByClassName('contract_error');
+        const purchase_buttons               = CommonFunctions.getElementsByClassName('purchase_button');
+        const price_comments                 = CommonFunctions.getElementsByClassName('price_comment');
 
         if (!CommonFunctions.isVisible(duration_amount_element)) {
             duration_wrapper_element.setVisibility(0);
             return;
+        }
+
+        if (duration_amount === '') {
+            const contract_errors_array  = Object.values(contract_errors);
+            const purchase_buttons_array = Object.values(purchase_buttons);
+            const price_comment_array    = Object.values(price_comments);
+
+            purchase_buttons_array.forEach(button => button.parentNode.classList.add('button-disabled'));
+            price_comment_array.forEach(comment => comment.style.display = 'none');
+            contract_errors_array.forEach(error => {
+                CommonFunctions.elementTextContent(error, 'Enter the trade duration to know your stake and payout.');
+                error.style.display = 'block';
+            });
         }
 
         const duration_min_element = CommonFunctions.getElementById('duration_minimum');
