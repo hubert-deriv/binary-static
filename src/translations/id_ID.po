@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: binary-static\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-11-01 05:47\n"
+"PO-Revision-Date: 2021-11-23 11:59\n"
 "Last-Translator: \n"
 "Language-Team: Indonesian\n"
 "MIME-Version: 1.0\n"
@@ -759,6 +759,9 @@ msgstr "Gelar sarjana dalam bidang perdagangan atau bidang yang berkaitan dengan
 
 msgid "A binary option is a contract in which one party undertakes to pay the other party a specified amount if the value of a given asset changes in a specific direction within a predetermined period. The major underlying asset class for binary options offered by the Company is Synthetic Indices."
 msgstr "Opsi binary adalah kontrak di mana satu pihak melakukan pembayaran kepada pihak lain sejumlah tertentu jika nilai aset yang diberikan berubah dalam arah tertentu dalam periode yang ditentukan sebelumnya. Kelas aset utama yang mendasari untuk opsi binary yang ditawarkan oleh Perusahaan adalah Indeks Sintetis."
+
+msgid "A binary option is a contract in which one party undertakes to pay the other party a specified amount if the value of a given asset changes in a specific direction within a predetermined period. The three major underlying asset classes for binary options offered by the Company are"
+msgstr "Opsi binary adalah kontrak di mana satu pihak melakukan pembayaran kepada pihak lain sejumlah tertentu jika nilai aset yang diberikan berubah dalam arah tertentu dalam periode yang ditentukan sebelumnya. Tiga kelas aset utama yang mendasari untuk opsi binary yang ditawarkan oleh Perusahaan adalah"
 
 msgid "A binary option is a contract purchased by a trader, which pays a pre-determined amount if their prediction is correct."
 msgstr "Opsi binary adalah sebuah kontrak yang dibeli oleh trader, yang memberi jumlah yang telah ditentukan jika analisa mereka benar."
@@ -2259,6 +2262,9 @@ msgstr "Binary.com Graduate Program"
 
 msgid "Binary.com in Numbers"
 msgstr "Binary.com dalam Angka"
+
+msgid "Binary.com is moving to Deriv on 30 November"
+msgstr "Binary.com berpindah ke Deriv pada 30 November"
 
 msgid "Binary.com recommends 1.1.1.1"
 msgstr "Binary.com merekomendasikan 1.1.1.1"
@@ -3976,8 +3982,8 @@ msgstr "Deriv Investments (Europe) Limited."
 msgid "Deriv Limited"
 msgstr "Deriv Limited"
 
-msgid "Deriv Limited, with registered office at 47 Esplanade, St Helier, Jersey JE1 0BD, Channel Islands, is the holding company for the subsidiaries listed below."
-msgstr "Deriv Limited, yang beralamat di 47 Esplanade, St Helier, Jersey JE1 0BD, Channel Islands, adalah perusahaan induk dari anak perusahaan yang tercantum di bawah ini."
+msgid "Deriv Limited, with registered office at 13 Castle Street, St. Helier, JE2 3BT, Jersey, is the holding company for the subsidiaries listed below."
+msgstr "Deriv Limited, yang beralamat di 13 Castle Street, St. Helier, JE2 3BT, Jersey adalah perusahaan induk dari anak perusahaan yang tercantum di bawah ini."
 
 msgid "Deriv.com launched"
 msgstr "Deriv.com diluncurkan"
@@ -8156,6 +8162,9 @@ msgstr "Nota: Untuk pertanyaan mengenai akun non aktif atau pembatalan akun, sil
 msgid "Note: Payment Agent transfers are only available for accounts registered with Deriv (SVG) LLC."
 msgstr "Catatan: Transfer Agen Pembayaran hanya tersedia untuk akun yang terdaftar di Deriv (SVG) LLC."
 
+msgid "Note: Please switch to your %1 account to change currencies."
+msgstr "Catatan: Pindah ke akun %1 Anda untuk merubah mata uang."
+
 msgid "Note: You are limited to one fiat currency account. The currency of your fiat account can be changed before you deposit into your fiat account for the first time or create an MT5 account. You may also open one account for each supported cryptocurrency."
 msgstr "Catatan: Anda hanya dapat memiliki satu akun dalam mata uang fiat. Mata uang akun fiat Anda dapat dirubah jika Anda belum melakukan deposit perdana atau mendaftar akun MT5. Anda juga dapat mendaftar pada setiap akun mata uang kripto yang tersedia."
 
@@ -10574,6 +10583,9 @@ msgstr "Waktu mulai"
 msgid "Start trading"
 msgstr "Mulai trading"
 
+msgid "Start using Deriv with your Binary.com email and password."
+msgstr "Mulai gunakan Deriv menggunakan email dan kata sandi Binary.com."
+
 msgid "State Benefits"
 msgstr "Manfaat Negara"
 
@@ -11157,7 +11169,7 @@ msgid "The %1 website's static content (CSS, Javascript) is available as the %2b
 msgstr "Konten statik %1 (CSS, Javascript) tersedia pada proyek open-source %2binary-static%3 github. Apakah Anda ingin merubah website %1 atau memperbaiki kecocokan browser, kecepatan website atau tampilan Javascript?. Silahkan lihat proyek dan kirimkan kritik dan saran perubahan kode Anda."
 
 msgid "The %1close%2 is the latest tick at or before the %1end time%2. If you selected a specific %1end time,%2 the %1end time%2 is the selected time."
-msgstr "%1Close%2 adalah tik terakhir pada atau sebelum %1waktu mulai%2. Jika Anda memilih %1waktu akhir%2 tertentu maka %1waktu akhir%2 adalah waktu yang Anda pilih tersebut."
+msgstr "%1Close%2 adalah tik terakhir pada atau sebelum %1waktu akhir%2. Jika Anda memilih %1waktu akhir%2 tertentu maka %1waktu akhir%2 adalah waktu yang Anda pilih tersebut."
 
 msgid "The %1contract period%2 is the period between the %1first tick%2 (after start time) and the %1end time%2."
 msgstr "%1Periode kontrak%2 adalah periode antara %1tik pertama%2 (setelah waktu mulai) hingga %1waktu akhir%2."
@@ -13059,6 +13071,9 @@ msgstr "Untuk mereset kata sandi Anda, masukkan alamat email yang Anda daftarkan
 msgid "To smoothly verify you, we need a better photo"
 msgstr "Untuk memverifikasi Anda dengan lancar, kami membutuhkan foto yang lebih baik"
 
+msgid "To transfer funds to your MT5 account, enter an amount of %1 or more"
+msgstr "Untuk mentransfer dana ke akun MT5 Anda, masukkan jumlah %1 atau lebih"
+
 msgid "To which it, at the time of execution of this Agreement was, or subsequently has become, in the public domain through no fault of the parties"
 msgstr "Untuk yang mana, pada saat pelaksanaan Perjanjian ini, atau kemudian menjadi, dalam domain publik bukan karena kesalahan pihak manapun"
 
@@ -13226,6 +13241,9 @@ msgstr "Bertrading logam dengan spread tetap dan variabel yang kompetitif."
 
 msgid "Trade now"
 msgstr "Trading sekarang"
+
+msgid "Trade on Deriv"
+msgstr "Trading pada Deriv"
 
 msgid "Trade on underlying markets that include forex, stock indices, commodities, and more."
 msgstr "Bertrading pada pasar dasar yang meliputi forex, indeks saham, komoditas, dan banyak lagi."

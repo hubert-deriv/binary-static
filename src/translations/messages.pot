@@ -745,6 +745,9 @@ msgstr ""
 msgid "A binary option is a contract in which one party undertakes to pay the other party a specified amount if the value of a given asset changes in a specific direction within a predetermined period. The major underlying asset class for binary options offered by the Company is Synthetic Indices."
 msgstr ""
 
+msgid "A binary option is a contract in which one party undertakes to pay the other party a specified amount if the value of a given asset changes in a specific direction within a predetermined period. The three major underlying asset classes for binary options offered by the Company are"
+msgstr ""
+
 msgid "A binary option is a contract purchased by a trader, which pays a pre-determined amount if their prediction is correct."
 msgstr ""
 
@@ -2243,6 +2246,9 @@ msgid "Binary.com Graduate Program"
 msgstr ""
 
 msgid "Binary.com in Numbers"
+msgstr ""
+
+msgid "Binary.com is moving to Deriv on 30 November"
 msgstr ""
 
 msgid "Binary.com recommends 1.1.1.1"
@@ -3961,7 +3967,7 @@ msgstr ""
 msgid "Deriv Limited"
 msgstr ""
 
-msgid "Deriv Limited, with registered office at 47 Esplanade, St Helier, Jersey JE1 0BD, Channel Islands, is the holding company for the subsidiaries listed below."
+msgid "Deriv Limited, with registered office at 13 Castle Street, St. Helier, JE2 3BT, Jersey, is the holding company for the subsidiaries listed below."
 msgstr ""
 
 msgid "Deriv.com launched"
@@ -8140,6 +8146,9 @@ msgstr ""
 msgid "Note: Payment Agent transfers are only available for accounts registered with Deriv (SVG) LLC."
 msgstr ""
 
+msgid "Note: Please switch to your %1 account to change currencies."
+msgstr ""
+
 msgid "Note: You are limited to one fiat currency account. The currency of your fiat account can be changed before you deposit into your fiat account for the first time or create an MT5 account. You may also open one account for each supported cryptocurrency."
 msgstr ""
 
@@ -10556,6 +10565,9 @@ msgid "Start time"
 msgstr ""
 
 msgid "Start trading"
+msgstr ""
+
+msgid "Start using Deriv with your Binary.com email and password."
 msgstr ""
 
 msgid "State Benefits"
@@ -13042,6 +13054,9 @@ msgstr ""
 msgid "To smoothly verify you, we need a better photo"
 msgstr ""
 
+msgid "To transfer funds to your MT5 account, enter an amount of %1 or more"
+msgstr ""
+
 msgid "To which it, at the time of execution of this Agreement was, or subsequently has become, in the public domain through no fault of the parties"
 msgstr ""
 
@@ -13208,6 +13223,9 @@ msgid "Trade metals on competitive fixed and variable spreads."
 msgstr ""
 
 msgid "Trade now"
+msgstr ""
+
+msgid "Trade on Deriv"
 msgstr ""
 
 msgid "Trade on underlying markets that include forex, stock indices, commodities, and more."
